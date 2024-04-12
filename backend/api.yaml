@@ -1,0 +1,89 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Conversation API
+paths:
+  /api/conversations:
+    post:
+      summary: Start a conversation
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/ConversationResponse'
+  /api/conversations/{conversationToken}/messages:
+    post:
+      summary: Send a message in a conversation
+      parameters:
+        - name: conversationToken
+          in: path
+          description: Token of the conversation
+          required: true
+          type: string
+          format: uuid
+        - name: message
+          in: body
+          description: Message content
+          required: true
+          schema:
+            $ref: '#/definitions/UserMessage'
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/ConversationResponse'
+  /api/conversations/{sessionToken}:
+    get:
+      summary: Get conversation details
+      parameters:
+        - name: sessionToken
+          in: path
+          description: Token of the conversation session
+          required: true
+          type: string
+          format: uuid
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/ConversationResponse'
+definitions:
+  UserMessage:
+    type: object
+    properties:
+      message:
+        type: string
+    required:
+      - message
+  ConversationResponse:
+    type: object
+    properties:
+      conversationToken:
+        type: string
+        format: uuid
+      response:
+        type: string
+  Conversation:
+    type: object
+    properties:
+      token:
+        type: string
+        format: uuid
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/Message'
+  Message:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uuid
+      sender:
+        type: string
+      timestamp:
+        type: string
+      conversation :
+        type: string
+        format: uuid
+
