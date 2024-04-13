@@ -1,0 +1,31 @@
+/* Custom CSS for pastel blue tones */
+body {
+  background-color: #f0f8ff; /* Light pastel blue */
+}
+.chat-container {
+  max-width: 500px;
+  margin: auto;
+}
+.chat-box {
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.user-message {
+  background-color: #add8e6; /* Light pastel blue for user input */
+}
+.ai-message {
+  background-color: #bfe5ff; /* Slightly darker pastel blue for AI response */
+}
+.message {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+}
+.user-message .message {
+  background-color: #add8e6; /* Light pastel blue for user input */
+  color: #000; /* Black text */
+}
+.ai-message .message {
+  background-color: #bfe5ff; /* Slightly darker pastel blue for AI response */
+  color: #000; /* Black text */
+}
