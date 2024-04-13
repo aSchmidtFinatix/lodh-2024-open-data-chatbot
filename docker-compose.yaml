@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend/
+    depends_on:
+      postgres:
+        condition: service_healthy
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: conversation
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    healthcheck:
+      test: pg_isready -U postgres -d postgres
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+  vectordb:
+    image: milvusdb/milvus:2.3-latest
+    container_name: milvus_db
+    environment:
+      ETCD_USE_EMBED: true
+      ETCD_DATA_DIR: /var/lib/milvus/etcd \
+      ETCD_CONFIG_PATH: /milvus/configs/embedEtcd.yaml \
+    healthcheck:
+      test: "curl -f http://localhost:9091/healthz"
+      interval: 30s
+      start_interval: 90s
+      timeout: 20s
+      retries: 3
+    ports:
+      - "19530:19530"
+      - "9091:9091"
+      - "2379:2379"
+    entrypoint: milvus run standalone 1> /dev/null
+
+volumes:
+  postgres-data:

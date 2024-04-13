@@ -8,6 +8,7 @@ WORKDIR /usr/app
 COPY . .
 
 # Build the project inside the container
+RUN ls -l gradlew
 RUN ./gradlew build
 
 # Expose the port the app runs on
