@@ -1,7 +1,7 @@
 async function fetchDataFromAPI(url, options) {
   try {
     const response = await fetch(url, options);
-    const result = await response.json();
+    return await response.json();
     //console.log(result.conversationToken);
     //console.log(response.json());
   } catch (error) {
@@ -9,14 +9,12 @@ async function fetchDataFromAPI(url, options) {
   }
 }
 
-var postConversationsURL = 'https://raw.githubusercontent.com/api/conversations'
+var postConversationsURL = 'http://localhost:8080/api/conversations'
 var postConversationsOptions = {
-  method: 'POST'/*,
+  method: 'POST',
   headers: {
-    'content-type': 'application/x-www-form-urlencoded',
-    'Accept-Encoding': 'application/gzip',
-    'X-RapidAPI-Key': '2a628a2aa7msh21b2b2ef151e50bp1d9caejsn507946985984',
-  }*/
+    'Access-Allow-Origin': "*"
+  }
 }
 
 /* get whole messages list to append it to the chat body */
@@ -31,17 +29,17 @@ async function getMessages (conversationToken) {
   result = fetchDataFromAPI(getMessagesURL, getMessagesOptions);
   return result;
 }
-
+var conversationToken
 function establishConversation() {
   // if we don't have conversationToken, make a post and retrieve it. Also when we do have it already, load the list of messages.
-  let conversationToken = localStorage.getItem('conversationToken');
-    if (conversationToken===null)
+  conversationToken = localStorage.getItem('conversationToken');
+    if (true || !conversationToken)
     {
-      //result = fetchDataFromAPI(postConversationsURL, postConversationsOptions);
-      //conversationToken = result.conversationToken;
-      conversationToken = "3fa85f64-5717-4562-b3fc-2c963f66afa6"; //only for test
-      localStorage.setItem('conversationToken', conversationToken)
-      console.log(conversationToken); // only for test
+
+     fetchDataFromAPI(postConversationsURL, postConversationsOptions).then((result) => {
+        conversationToken = result.conversationToken
+        localStorage.setItem('conversationToken', conversationToken)
+     })
     } else {
       //messages = getMessages(conversationToken);
       // Function to display messages in the chat interface
@@ -81,21 +79,27 @@ function establishConversation() {
 
 
 async function postMessage (conversationToken,message) {
-  let postConversationsMessagesURL = `https://raw.githubusercontent.com/api/conversations/${conversationToken}/messages`
+  let postConversationsMessagesURL = `http://localhost:8080/api/conversations/${conversationToken}/messages`
   let postConversationsMessagesOptions = {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
       'conversationToken': conversationToken,
+    },
+    body: JSON.stringify({
       'message': message
-    }
+    })
   }
-  let result = fetchDataFromAPI(postConversationsMessagesURL, postConversationsMessagesOptions);
-  return(result);
+  let result
+  fetchDataFromAPI(postConversationsMessagesURL, postConversationsMessagesOptions).then((response) => {
+    let answer = response.response
+    addToConversation(answer);
+  });
+  return result
 }
 
 // Function to send message
-function sendMessage(conversationToken) {
+function sendMessage() {
   let messageInput = document.querySelector('.chat-box input[type="text"]');
   let message = messageInput.value;
   let chatMessages = document.getElementById('chat-messages');
@@ -104,16 +108,21 @@ function sendMessage(conversationToken) {
   newMessage.textContent = message;
   chatMessages.appendChild(newMessage);
   messageInput.value = ''; // Clear input field after sending message
+  postMessage(conversationToken, message)
+}
 
+function addToConversation(answer) {
   // Simulate AI response (replace with actual AI response)
+  let chatMessages = document.getElementById('chat-messages');
   let aiResponseDiv = document.createElement('div');
   aiResponseDiv.className = 'message ai-message'; // AI message
   console.log(conversationToken);
-  let aiResponse = postMessage(conversationToken, message)
-  aiResponseDiv.textContent = aiResponse;
+
+  aiResponseDiv.textContent = answer;
   chatMessages.appendChild(aiResponseDiv);
 }
 
+waitForElements()
 function waitForElements() {
   let chatboxButton = document.querySelector('.chat-box button');
   if(!chatboxButton) {
@@ -124,8 +133,8 @@ function waitForElements() {
 }
 
 function initializeApp() {
-  addEventListeners();
   establishConversation();
+  addEventListeners();
 }
 
 function addEventListeners() {
