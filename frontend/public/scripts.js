@@ -2,8 +2,6 @@ async function fetchDataFromAPI(url, options) {
   try {
     const response = await fetch(url, options);
     return await response.json();
-    //console.log(result.conversationToken);
-    //console.log(response.json());
   } catch (error) {
     console.error(error);
   }
@@ -17,7 +15,6 @@ var postConversationsOptions = {
   }
 }
 
-/* get whole messages list to append it to the chat body */
 async function getMessages (conversationToken) {
   let getMessagesURL = `https://raw.githubusercontent.com/api/conversations/${conversationToken}/messages`
   getMessagesOptions = {
@@ -29,52 +26,46 @@ async function getMessages (conversationToken) {
   result = fetchDataFromAPI(getMessagesURL, getMessagesOptions);
   return result;
 }
+
 var conversationToken
 function establishConversation() {
-  // if we don't have conversationToken, make a post and retrieve it. Also when we do have it already, load the list of messages.
   conversationToken = localStorage.getItem('conversationToken');
-    if (true || !conversationToken)
-    {
-
-     fetchDataFromAPI(postConversationsURL, postConversationsOptions).then((result) => {
-        conversationToken = result.conversationToken
-        localStorage.setItem('conversationToken', conversationToken)
-     })
-    } else {
-      //messages = getMessages(conversationToken);
-      // Function to display messages in the chat interface
+  if (!conversationToken)
+  {
+    fetchDataFromAPI(postConversationsURL, postConversationsOptions).then((result) => {
+      conversationToken = result.conversationToken
+      localStorage.setItem('conversationToken', conversationToken)
+    })
+  } else {
+    // for testing purposes only
+    const messages = [{
+        id: "1",
+        sender: "user",
+        timestamp: "2024-04-14T10:00:00",
+        conversation: "123456",
+        text: "This is an examplary user message. The conversation token could not be retrieved from the backend."
+      },
+      {
+        id: "2",
+        sender: "AI",
+        timestamp: "2024-04-14T10:01:00",
+        conversation: "123456",
+        text: "This is an examplary chatbot message. Please make sure the backend service is available and then reload the page."
+      },
+    ];
       
-      /* for testing purposes only */
-      const messages = [{
-          id: "1",
-          sender: "user",
-          timestamp: "2024-04-14T10:00:00",
-          conversation: "123456",
-          text: "Hello, how can I help you?"
-        },
-        {
-          id: "2",
-          sender: "AI",
-          timestamp: "2024-04-14T10:01:00",
-          conversation: "123456",
-          text: "Hello! I'm here to assist you."
-        },
-      // Add more messages here...
-      ];
-        
-      var chatMessages = document.getElementById('chat-messages');
-      messages.forEach(message => {
-        const messageElement = document.createElement('div');
-        messageElement.textContent = `${message.sender}: ${message.text}`;
-        // Add CSS class based on the sender
-        if (message.sender === 'user') {
-          messageElement.classList.add('message', 'user-message');
-        } else if (message.sender === 'AI') {
-          messageElement.classList.add('message', 'ai-message');
-        }
-        chatMessages.appendChild(messageElement);
-      });
-    }
+    var chatMessages = document.getElementById('chat-messages');
+    messages.forEach(message => {
+      const messageElement = document.createElement('div');
+      messageElement.textContent = `${message.sender}: ${message.text}`;
+      if (message.sender === 'user') {
+        messageElement.classList.add('message', 'user-message');
+      } else if (message.sender === 'AI') {
+        messageElement.classList.add('message', 'ai-message');
+      }
+      chatMessages.appendChild(messageElement);
+    });
+  }
 }
 
 
@@ -98,31 +89,31 @@ async function postMessage (conversationToken,message) {
   return result
 }
 
-// Function to send message
 function sendMessage() {
   let messageInput = document.querySelector('.chat-box input[type="text"]');
   let message = messageInput.value;
   let chatMessages = document.getElementById('chat-messages');
   let newMessage = document.createElement('div');
-  newMessage.className = 'message user-message'; // User message
+  newMessage.className = 'message user-message';
   newMessage.textContent = message;
   chatMessages.appendChild(newMessage);
-  messageInput.value = ''; // Clear input field after sending message
+  messageInput.value = '';
   postMessage(conversationToken, message)
 }
 
 function addToConversation(answer) {
-  // Simulate AI response (replace with actual AI response)
   let chatMessages = document.getElementById('chat-messages');
   let aiResponseDiv = document.createElement('div');
-  aiResponseDiv.className = 'message ai-message'; // AI message
+  aiResponseDiv.className = 'message ai-message';
   console.log(conversationToken);
 
   aiResponseDiv.textContent = answer;
   chatMessages.appendChild(aiResponseDiv);
 }
 
+
 waitForElements()
+
 function waitForElements() {
   let chatboxButton = document.querySelector('.chat-box button');
   if(!chatboxButton) {
@@ -138,12 +129,10 @@ function initializeApp() {
 }
 
 function addEventListeners() {
-  // Event listener for send button click
   document.querySelector('.chat-box button').addEventListener('click', function() {
     sendMessage(conversationToken);
   });
   
-  // Event listener for Enter key press
   document.querySelector('.chat-box input[type="text"]').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
       sendMessage();
