@@ -1,6 +1,6 @@
 package de.finatix.lodh24.backend.conversation
 
-import de.finatix.lodh24.backend.ai.ChatbotService
+import de.finatix.lodh24.backend.ai.OpenAiService
 import de.finatix.lodh24.backend.conversation.db.Conversation
 import de.finatix.lodh24.backend.conversation.db.ConversationRepository
 import de.finatix.lodh24.backend.conversation.db.Message
@@ -14,7 +14,7 @@ import java.util.*
 class ConversationService {
 
     @Autowired
-    private lateinit var chatbotService: ChatbotService
+    private lateinit var openAiService: OpenAiService
 
     @Autowired
     private lateinit var conversationRepository: ConversationRepository
@@ -28,7 +28,6 @@ class ConversationService {
 
     fun sendMessage(conversationToken: UUID, message: String): String {
         val conversation = conversationRepository.findById(conversationToken).orElseThrow()
-        val response = generateResponse(message, conversation)
 
         val userMessage = Message(
             sender = "User",
@@ -36,13 +35,18 @@ class ConversationService {
             timestamp = getCurrentTimestamp(),
             conversation = conversation.token
         )
+
+        conversation.messages.add(userMessage)
+
+        val response = generateResponse(message, conversation)
+
+
         val responseMessage = Message(
             sender = "AI",
             text = response,
             timestamp = getCurrentTimestamp(),
             conversation = conversation.token
         )
-        conversation.messages.add(userMessage)
         conversation.messages.add(responseMessage)
         conversationRepository.save(conversation)
 
@@ -56,7 +60,7 @@ class ConversationService {
     }
 
     private fun generateResponse(message: String, conversation: Conversation): String {
-        val answer = chatbotService.generateResponse(message,conversation)
+        val answer = openAiService.generateResponse(message,conversation)
         return answer.result.output.content
     }
 

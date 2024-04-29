@@ -6,6 +6,7 @@ import java.util.*
 
 @RestController
 @RequestMapping("/api/conversations")
+@CrossOrigin(origins = ["*"])
 class ConversationController(private val conversationService: ConversationService) {
 
     @PostMapping
