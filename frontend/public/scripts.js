@@ -7,7 +7,7 @@ async function fetchDataFromAPI(url, options) {
   }
 }
 
-var postConversationsURL = 'http://localhost:8080/api/conversations'
+var postConversationsURL = 'http://localhost:8080/api/conversations';
 var postConversationsOptions = {
   method: 'POST',
   headers: {
@@ -16,7 +16,7 @@ var postConversationsOptions = {
 }
 
 async function getMessages (conversationToken) {
-  let getMessagesURL = `https://raw.githubusercontent.com/api/conversations/${conversationToken}/messages`
+  let getMessagesURL = `https://raw.githubusercontent.com/api/conversations/${conversationToken}/messages`;
   getMessagesOptions = {
     method: 'GET',
     headers: {
@@ -27,14 +27,14 @@ async function getMessages (conversationToken) {
   return result;
 }
 
-var conversationToken
+var conversationToken;
 function establishConversation() {
   conversationToken = localStorage.getItem('conversationToken');
   if (!conversationToken)
   {
     fetchDataFromAPI(postConversationsURL, postConversationsOptions).then((result) => {
-      conversationToken = result.conversationToken
-      localStorage.setItem('conversationToken', conversationToken)
+      conversationToken = result.conversationToken;
+      localStorage.setItem('conversationToken', conversationToken);
     })
   } else {
     // for testing purposes only
@@ -70,7 +70,7 @@ function establishConversation() {
 
 
 async function postMessage (conversationToken,message) {
-  let postConversationsMessagesURL = `http://localhost:8080/api/conversations/${conversationToken}/messages`
+  let postConversationsMessagesURL = `http://localhost:8080/api/conversations/${conversationToken}/messages`;
   let postConversationsMessagesOptions = {
     method: 'POST',
     headers: {
@@ -80,13 +80,13 @@ async function postMessage (conversationToken,message) {
     body: JSON.stringify({
       'message': message
     })
-  }
-  let result
+  };
+  let result;
   fetchDataFromAPI(postConversationsMessagesURL, postConversationsMessagesOptions).then((response) => {
-    let answer = response.response
+    let answer = response.response;
     addToConversation(answer);
   });
-  return result
+  return result;
 }
 
 function sendMessage() {
@@ -98,7 +98,7 @@ function sendMessage() {
   newMessage.textContent = message;
   chatMessages.appendChild(newMessage);
   messageInput.value = '';
-  postMessage(conversationToken, message)
+  postMessage(conversationToken, message);
 }
 
 function addToConversation(answer) {
@@ -112,7 +112,7 @@ function addToConversation(answer) {
 }
 
 
-waitForElements()
+waitForElements();
 
 function waitForElements() {
   let chatboxButton = document.querySelector('.chat-box button');
