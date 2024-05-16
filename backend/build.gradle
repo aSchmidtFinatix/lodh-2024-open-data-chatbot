@@ -35,6 +35,12 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation "org.springframework.ai:spring-ai-milvus-store-spring-boot-starter"
+	implementation("org.eclipse.rdf4j:rdf4j-rio-turtle:3.7.0")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+	implementation("org.apache.commons:commons-csv:1.8")
+	implementation("org.apache.poi:poi:5.2.3")
+	implementation("org.apache.poi:poi-ooxml:5.2.3")
+	implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
 
 }
 
