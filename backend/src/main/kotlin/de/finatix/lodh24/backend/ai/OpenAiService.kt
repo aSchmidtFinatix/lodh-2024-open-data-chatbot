@@ -30,6 +30,8 @@ class OpenAiService {
 
         val context = vectorStore.similaritySearch(SearchRequest.query(message).withTopK(1))
 
+        println(context)
+
         val source = getSourceFromDocuments(context)
 
         val sysPrompt = UserMessage(
@@ -40,10 +42,6 @@ class OpenAiService {
         val userPrompt = UserMessage(
             "You've provided the following MESSAGE: $message. The CONTEXT is: $context. Please specify the SOURCE for your inquiry: $source."
         )
-
-        println(source)
-        println(messages)
-        println(context)
 
         val analysis = client.call(Prompt(listOf(sysPrompt), options))
 
