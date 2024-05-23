@@ -21,12 +21,19 @@ class ConversationController(private val conversationService: ConversationServic
         @RequestBody message: UserMessage
     ): ConversationResponse {
         val response = conversationService.sendMessage(conversationToken, message.message)
-        return ConversationResponse(conversationToken, response)
+        return ConversationResponse(conversationToken, response.text)
     }
 
-    @GetMapping("/{sessionToken}")
-    fun getConversation(@PathVariable sessionToken: UUID): Conversation {
-        return conversationService.getConversation(sessionToken)
+    @GetMapping("/{conversationToken}")
+    fun getConversation(@PathVariable conversationToken: UUID): Conversation {
+        return conversationService.getConversation(conversationToken)
+    }
+
+    @GetMapping("/")
+    fun getConversations(@RequestParam("tokens") tokens: List<UUID>): List<PastConversation> {
+        val conversations = conversationService.getPastConversations(tokens)
+
+        return conversations
     }
 }
 

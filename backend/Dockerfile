@@ -1,5 +1,5 @@
 # Use official OpenJDK 19 image as base
-FROM openjdk:19-jdk
+FROM amazoncorretto:17-alpine3.17-jdk
 
 # Set the working directory in the container
 WORKDIR /usr/app

@@ -10,6 +10,8 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
+data class PastConversation(val title: String, val id: UUID)
+
 @Service
 class ConversationService {
 
@@ -26,7 +28,21 @@ class ConversationService {
         return conversationToken
     }
 
-    fun sendMessage(conversationToken: UUID, message: String): String {
+    fun getPastConversations(tokenList: List<UUID>): List<PastConversation> {
+        val savedConversations = conversationRepository.findAllById(tokenList)
+        val view = mutableListOf<PastConversation>()
+
+        savedConversations.forEach {
+            view.add(PastConversation(
+                id = it.token,
+                title = ""
+            ))
+        }
+
+        return view
+    }
+
+    fun sendMessage(conversationToken: UUID, message: String): Message {
         val conversation = conversationRepository.findById(conversationToken).orElseThrow()
 
         val userMessage = Message(
@@ -50,7 +66,7 @@ class ConversationService {
         conversation.messages.add(responseMessage)
         conversationRepository.save(conversation)
 
-        return response
+        return responseMessage
     }
 
     fun getConversation(conversationToken: UUID): Conversation {
