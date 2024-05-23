@@ -30,7 +30,6 @@ class ScrapingService {
         try {
             val connection = url.openConnection()
             connection.connect()
-            logger.info("Connection open for: $dataCatalogue")
             val input = connection.getInputStream()
             val model = Rio.parse(input, "UTF-8", RDFFormat.TURTLE)
             input.close()
@@ -48,7 +47,6 @@ class ScrapingService {
             val predicate = statement.predicate.stringValue()
             if (predicate == "http://purl.org/dc/terms/format") {
                 val mediaType = statement.`object`.stringValue().lowercase()
-                println(mediaType)
                 if (!mediaType.contains("zip")) {
                     val dataSet = model.filter { it.subject == statement.subject }
                         .firstOrNull { it.predicate.stringValue() == "http://www.w3.org/ns/dcat#accessURL" }?.`object`?.stringValue()

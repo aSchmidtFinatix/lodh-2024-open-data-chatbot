@@ -3,15 +3,14 @@ package de.finatix.lodh24.backend.ai
 import de.finatix.lodh24.backend.scraping.DataSet
 import de.finatix.lodh24.backend.scraping.Format
 import de.finatix.lodh24.backend.scraping.ScrapingService
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Service
 import kotlinx.coroutines.*
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
-import org.apache.commons.csv.CSVRecord
 import org.apache.poi.ss.usermodel.WorkbookFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
+import org.springframework.stereotype.Service
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.URL
@@ -39,35 +38,37 @@ class DataImportService {
         runBlocking {
             val jobs = dataSets.map { dataSet ->
                 launch {
-                    processUrl(dataSet)
+                    val dataSetSpec = generateSpec(dataSet)
+                    if (!dataSetSpec.isNullOrEmpty()) {
+                        openAiService.saveDataSet(dataSetSpec, dataSet)
+                    }
                 }
             }
 
             jobs.forEach { it.join() }
+            logger.info("Import Done is done!")
         }
     }
 
-    private suspend fun processUrl(dataSet: DataSet) {
-        logger.info("Processing URL: $dataSet")
-        val description: String
-        withContext(Dispatchers.IO) {
+    private suspend fun generateSpec(dataSet: DataSet): String? {
+        return withContext(Dispatchers.IO) {
             try {
                 val connection = URL(dataSet.url).openConnection()
                 connection.connect()
 
-                val inputStream = connection.getInputStream()
-
-                description = when (dataSet.format) {
-                    Format.XLS, Format.XLSX -> processExcel(inputStream)
-                    Format.CSV -> processCSV(inputStream)
+                connection.getInputStream().use { inputStream ->
+                    return@withContext when (dataSet.format) {
+                        Format.XLS, Format.XLSX -> processExcel(inputStream)
+                        Format.CSV -> processCSV(inputStream)
+                    }
                 }
-                inputStream.close()
-                openAiService.saveDataSet(description, dataSet)
             } catch (e: Exception) {
-                //logger.warning("Error processing URL: $url, Error: ${e.message}")
+                logger.warning("Error: ${e.message}")
+                null
             }
         }
     }
+
 
     fun processCSV(inputStream: InputStream): String {
         val csv = CSVParser(InputStreamReader(inputStream), CSVFormat.DEFAULT.withFirstRecordAsHeader())
