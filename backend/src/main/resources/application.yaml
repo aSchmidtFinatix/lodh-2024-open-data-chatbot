@@ -32,4 +32,6 @@ spring:
     locations: classpath:db/migration
     baseline-on-migrate: true
   dataimport:
-    enabled: true
+    enabled: false
+  thymeleaf: # Thymeleaf
+    cache: false

@@ -41,7 +41,7 @@ dependencies {
 	implementation("org.apache.poi:poi:5.2.3")
 	implementation("org.apache.poi:poi-ooxml:5.2.3")
 	implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
-
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
 dependencyManagement {
