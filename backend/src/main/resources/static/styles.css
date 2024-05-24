@@ -1,31 +1,130 @@
-/* Custom CSS for pastel blue tones */
+* {
+  font-family: "Onest", sans-serif;
+}
+
 body {
-  background-color: #f0f8ff; /* Light pastel blue */
+  width: 90vw;
 }
+
+.row.top-bar {
+  background-color: #082E51;
+  color: white;
+  position: absolute;
+  top: 0;
+  border-bottom: solid #082E51 2px;
+  height: 4rem;
+  width: 100vw;
+  z-index: 1;
+}
+
+.row.top-bar h3 {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  float: left;
+}
+
+.row.chat {
+  padding-top: 4rem;
+  position: absolute;
+  top: 0;
+  height: 90svh;
+  z-index: 0;
+}
+
+.conversation-overview {
+  border-right: solid #082E51 2px;
+  height: 92svh;
+  overflow: scroll;
+}
+
+@media screen and (max-width: 480px) {
+  .conversation-overview {
+    height: auto;
+    border-bottom: solid #082E51 2px;
+  }
+}
+
+.conversation-overview img {
+  float: right;
+  margin: 1rem;
+  max-width: 50%;
+  position: absolute;
+  bottom: 0;
+}
+
+#city-context {
+  float: right;
+  margin-top: 1rem;
+}
+
+.conversation-item {
+  border-bottom: solid #082E51 1px;
+}
+
+.conversation-item.active {
+  background-color: #bfe5ff;
+}
+
+.conversation-item:hover {
+  background-color: #BFE5FF;
+  cursor: pointer;
+}
+
 .chat-container {
-  max-width: 500px;
+  position: relative;
   margin: auto;
+  overflow: scroll;
 }
+
 .chat-box {
   border-radius: 10px;
   margin-bottom: 20px;
+  overflow: scroll;
 }
-.user-message {
-  background-color: #add8e6; /* Light pastel blue for user input */
+
+.message-container {
+  padding: 1rem;
 }
-.ai-message {
-  background-color: #bfe5ff; /* Slightly darker pastel blue for AI response */
-}
-.message {
+
+.message-content {
   padding: 10px;
   margin: 5px;
   border-radius: 10px;
+  width: 70%;
+  color: #000;
 }
-.user-message .message {
-  background-color: #add8e6; /* Light pastel blue for user input */
-  color: #000; /* Black text */
+
+.user-message {
+  float: right;
 }
-.ai-message .message {
-  background-color: #bfe5ff; /* Slightly darker pastel blue for AI response */
-  color: #000; /* Black text */
+
+.user-message .message-content {
+  display: inline-block;
+  background-color: #8BC9E0;
+  background-color: #DDDDDD;
+  color: #000;
+}
+
+.ai-message {
+  float: left;
+}
+
+.ai-message .message-content {
+  display: inline-block;
+  background-color: #8BC9E0;
+  color: #000;
+}
+
+.avatar {
+}
+
+.chat-box .input-group {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.btn {
+  background-color: #082E51;
+  color: white;
 }

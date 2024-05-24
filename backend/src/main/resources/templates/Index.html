@@ -5,30 +5,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Open Data Platform Chat</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:ref="@{/styles.css}">
+
+<!--    <link rel="stylesheet" th:href="@{/styles.css}">-->
+    <link rel="stylesheet" href="../static/styles.css">
 
     <!-- Bootstrap JS and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script type="text/javascript" th:src="@{/scripts.js}"> </script>
+<!--    <script type="text/javascript" th:src="@{/scripts.js}"></script>-->
+    <script type="text/javascript" src="../static/scripts.js"></script>
+
+    <script src="http://localhost:35729/livereload.js"></script>
 </head>
 <body>
-<div class="container mt-5 chat-container">
-    <div class="row">
-        <div class="col-md-12">
-            <!-- Chat Interface -->
-            <div class="chat-box">
-                <h5 class="text-primary">Open DataChat</h5>
-                <div id="chat-messages">
+<div id="view">
+    <div class="row top-bar">
+        <div class="col-lg-3 col-md-4">
+            <h3 class="">Open Data Assistant</h3>
+        </div>
+        <div class="col-lg-9 col-md-8">
+            <h3 class="">Conversation-1</h3>
+            <form id="city-context" action="/action_page.php">
+                <label for="city">Wähle eine Stadt:</label>
+                <select id="city" name="cars">
+                    <option value="Leipzig">Leipzig</option>
+                    <option value="Hamburg">Hamburg</option>
+                    <option value="Berlin">Berlin</option>
+                    <option value="München">München</option>
+    <!--                <option value="Alle">Alle</option>-->
+                </select>
+            </form>
+        </div>
+    </div>
+    <div class="row chat">
+        <div class="col-lg-3 col-md-4">
+            <div class="conversation-overview">
+                <div class="conversation-item active p-1">
+                    <p class="conversation-item-name font-weight-bold m-0">Conversation-1</p>
+                    <p class="conversation-preview m-0">...last message preview...</p>
                 </div>
-                <div class="input-group mt-3">
+                <div class="conversation-item p-1">
+                    <p class="conversation-item-name font-weight-bold m-0">Conversation-2</p>
+                    <p class="conversation-preview m-0">...last message preview...</p>
+                </div>
+                <div>
+    <!--                <img alt="Finatix Logo" th:src="@{/assets/powered_by_finatix.png}">-->
+                    <img alt="Finatix Logo" src="../static/assets/powered_by_finatix.png">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-8">
+            <div class="chat-box">
+                <div id="chat-messages">
+                    <div class="message-container ai-message">
+                        <!--                    <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">-->
+                        <img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32">
+                        <div class="message-content">
+                            <span class="message-sender font-weight-bold">ODA</span>
+                            <span class="font-weight-bold">Gerade eben</span>
+                            <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
+                        </div>
+                    </div>
+                    <div class="message-container user-message">
+                        <div class="message-content">
+                            <span class="message-sender font-weight-bold">Du</span>
+                            <span class="font-weight-bold">Gerade eben</span>
+                            <p class="message-text">Wie viele Museen gibt es in Leipzig?</p>
+                        </div>
+                        <!--                    <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">-->
+                        <img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32">
+                    </div>
+                    <div class="message-container ai-message">
+                        <!--                    <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">-->
+                        <img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32">
+                        <div class="message-content">
+                            <span class="message-sender font-weight-bold">ODA</span>
+                            <span class="font-weight-bold">Gerade eben</span>
+                            <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
+                        </div>
+                    </div>
+                    <div class="message-container ai-message">
+                        <!--                    <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">-->
+                        <img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32">
+                        <div class="message-content">
+                            <span class="message-sender font-weight-bold">ODA</span>
+                            <span class="font-weight-bold">Gerade eben</span>
+                            <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
+                        </div>
+                    </div>
+                    <div class="message-container ai-message">
+                        <!--                    <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">-->
+                        <img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32">
+                        <div class="message-content">
+                            <span class="message-sender font-weight-bold">ODA</span>
+                            <span class="font-weight-bold">Gerade eben</span>
+                            <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
+                        </div>
+                    </div>
+                    <div class="message-container ai-message">
+                        <!--                    <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">-->
+                        <img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32">
+                        <div class="message-content">
+                            <span class="message-sender font-weight-bold">ODA</span>
+                            <span class="font-weight-bold">Gerade eben</span>
+                            <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
+                        </div>
+                    </div>
+                    <div class="message-container ai-message">
+                        <!--                    <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">-->
+                        <img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32">
+                        <div class="message-content">
+                            <span class="message-sender font-weight-bold">ODA</span>
+                            <span class="font-weight-bold">Gerade eben</span>
+                            <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
+                        </div>
+                    </div>
+                    <div class="message-container ai-message">
+                        <!--                    <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">-->
+                        <img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32">
+                        <div class="message-content">
+                            <span class="message-sender font-weight-bold">ODA</span>
+                            <span class="font-weight-bold">Gerade eben</span>
+                            <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-2">
                     <input type="text" class="form-control" placeholder="Type your message..."
                            aria-label="Type your message" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">Send</button>
+                        <button class="btn" type="button">Send</button>
                     </div>
                 </div>
             </div>
