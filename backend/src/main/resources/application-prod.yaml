@@ -1,14 +1,12 @@
 spring:
-  profile:
-    active: "local"
   ai:
     vectorstore:
       milvus:
         client:
-          host: "localhost"
+          host: ${VDB_URL}
           port: 19530
-          username: "root"
-          password: "milvus"
+          username: ${VDB_USER}
+          password: ${VDB_PASSWORD}
         databaseName: "default"
         collectionName: "vector_store"
         embeddingDimension: 1536
@@ -20,8 +18,8 @@ spring:
       max-attempts: 1
   datasource:
     url: jdbc:postgresql://localhost:5432/conversation
-    username: user
-    password: password
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:

@@ -1,6 +1,4 @@
 spring:
-  profile:
-    active: "local"
   ai:
     vectorstore:
       milvus:
