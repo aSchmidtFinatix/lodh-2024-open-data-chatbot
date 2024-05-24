@@ -8,6 +8,7 @@ import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
 import org.apache.poi.ss.usermodel.WorkbookFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.context.event.ApplicationReadyEvent
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Service
@@ -20,6 +21,7 @@ import java.util.logging.Logger
 data class DataRecord(val values: Map<String, String>)
 
 @Service
+@ConditionalOnProperty("spring.dataimport.enabled")
 class DataImportService {
 
     @Autowired
