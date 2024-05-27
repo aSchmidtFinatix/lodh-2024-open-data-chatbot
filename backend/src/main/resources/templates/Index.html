@@ -38,6 +38,7 @@
 </header>
 <main class="layout">
     <aside class="chat-aside">
+        <div class="mobile-toggle">›</div>
         <section class="conversation-list">
             <article class="conversation-item active">
                 <p class="conversation-item-name font-weight-bold">Conversation-1</p>
@@ -98,6 +99,10 @@
         </div>
     </aside>
     <main class="chat-box">
+        <svg class="loading-spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+            <circle class="loading-spinner__path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+        </svg>
+
         <section class="chat-messages">
             <div class="message-container ai-message">
                 <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">

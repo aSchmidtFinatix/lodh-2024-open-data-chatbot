@@ -50,7 +50,32 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.hidden {
+  display: none;
+}
+
+.block {
+  display: block;
+}
+
 /* Custom Styles */
+.loading-spinner {
+  display: none;
+  animation: rotator 1.4s linear infinite;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+}
+.loading-spinner.active {
+  display: block;
+}
+.loading-spinner .loading-spinner__path {
+  stroke-dasharray: 187;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+
 .top-bar {
   background-color: #082E51;
   color: white;
@@ -74,12 +99,7 @@ h1, h2, h3, h4, h5, h6 {
 .layout {
   padding-top: 4.25rem;
   display: grid;
-  grid-template-areas: "main";
-}
-@media screen and (min-width: 900px) {
-  .layout {
-    grid-template-areas: "aside main main main main main" "aside main main main main main";
-  }
+  grid-template-areas: "aside main main main main main" "aside main main main main main";
 }
 
 .chat-aside {
@@ -90,11 +110,47 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   margin: 0;
   padding: 0;
+  position: relative;
   width: 23px;
 }
 @media screen and (min-width: 900px) {
   .chat-aside {
     width: auto;
+  }
+}
+.chat-aside.visible {
+  width: 60svw;
+  position: fixed;
+  top: 4rem;
+  bottom: 0;
+  left: 0;
+  box-shadow: 3px 3px 30px rgba(0, 0, 0, 0.5);
+}
+.chat-aside.visible .conversation-list, .chat-aside.visible .finatix-container {
+  display: block;
+}
+.chat-aside.visible .mobile-toggle {
+  transform: rotateZ(180deg);
+}
+.chat-aside .mobile-toggle {
+  display: none;
+  cursor: pointer;
+  background: #3496BA;
+  position: absolute;
+  border-radius: 0 4px 4px 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  color: white;
+  text-align: center;
+  height: 40px;
+  line-height: 35px;
+  font-size: 2rem;
+}
+@media screen and (max-width: 900px) {
+  .chat-aside .mobile-toggle {
+    display: block;
   }
 }
 .chat-aside .conversation-list {
@@ -243,6 +299,45 @@ h1, h2, h3, h4, h5, h6 {
   border-right: 1px solid rgb(163, 163, 163);
   border-bottom: 1px solid rgb(163, 163, 163);
   color: white;
+}
+
+@keyframes colors {
+  0% {
+    stroke: #4285F4;
+  }
+  25% {
+    stroke: #DE3E35;
+  }
+  50% {
+    stroke: #F7C223;
+  }
+  75% {
+    stroke: #1B9A59;
+  }
+  100% {
+    stroke: #4285F4;
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    transform: rotate(450deg);
+  }
+}
+@keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

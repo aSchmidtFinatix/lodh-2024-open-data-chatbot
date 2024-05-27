@@ -13,6 +13,10 @@ $chatBubbleFromUserBackgroundColor: #DDD;
 $topBarHeight: 4.25rem;
 $finatixLogoHeight: 5rem;
 
+// loading spinner
+$offset: 187;
+$duration: 1.4s;
+
 $mobileBreakpointWidth: 900px;
 
 /* Default Styles*/
@@ -53,7 +57,32 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
   }
 }
+.hidden { display: none; }
+.block { display: block; }
+
 /* Custom Styles */
+
+.loading-spinner {
+  display: none;
+
+  animation: rotator $duration linear infinite;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+
+  &.active {
+    display: block;
+  }
+
+  .loading-spinner__path {
+    stroke-dasharray: $offset;
+    stroke-dashoffset: 0;
+    transform-origin: center;
+    animation:
+            dash $duration ease-in-out infinite,
+            colors ($duration*4) ease-in-out infinite;
+  }
+}
 
 .top-bar {
   background-color: $backgroundColor;
@@ -83,13 +112,9 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: $topBarHeight;
 
   display: grid;
-  grid-template-areas: 'main';
-
-  @media screen and (min-width: $mobileBreakpointWidth) {
-      grid-template-areas:
-      'aside main main main main main'
-      'aside main main main main main';
-  }
+  grid-template-areas:
+    'aside main main main main main'
+    'aside main main main main main';
 }
 
 .chat-aside {
@@ -100,10 +125,50 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: column;
   margin: 0;
   padding: 0;
+  position: relative;
 
   width: 23px;
   @media screen and (min-width: $mobileBreakpointWidth) {
     width: auto;
+  }
+
+  &.visible {
+    width: 60svw;
+    position: fixed;
+    top: 4rem;
+    bottom: 0;
+    left: 0;
+    box-shadow: 3px 3px 30px rgba(0,0,0,0.5);
+
+    .conversation-list, .finatix-container {
+      display: block;
+    }
+
+    .mobile-toggle {
+      transform: rotateZ(180deg);
+    }
+  }
+
+  .mobile-toggle {
+    display: none;
+    cursor: pointer;
+    background: #3496BA;
+    position: absolute;
+    border-radius: 0 4px 4px 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 20px;
+    color: white;
+    text-align: center;
+    height: 40px;
+    line-height: 35px;
+    font-size: 2rem;
+
+    @media screen and (max-width: $mobileBreakpointWidth) {
+      display: block;
+    }
   }
 
   .conversation-list {
@@ -177,6 +242,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .chat-box {
+
   grid-area: main;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -288,4 +354,29 @@ h1, h2, h3, h4, h5, h6 {
       }
     }
   }
+}
+
+@keyframes colors {
+  0% { stroke: #4285F4; }
+  25% { stroke: #DE3E35; }
+  50% { stroke: #F7C223; }
+  75% { stroke: #1B9A59; }
+  100% { stroke: #4285F4; }
+}
+
+@keyframes dash {
+  0% { stroke-dashoffset: $offset; }
+  50% {
+    stroke-dashoffset: $offset/4;
+    transform:rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: $offset;
+    transform:rotate(450deg);
+  }
+}
+
+@keyframes rotator {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(270deg); }
 }
