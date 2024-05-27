@@ -8,6 +8,14 @@
  */
 
 $backgroundColor: #082E51;
+$chatBubbleFromAiBackgroundColor: #ADD5E3;
+$chatBubbleFromUserBackgroundColor: #DDD;
+$topBarHeight: 4.25rem;
+$finatixLogoHeight: 5rem;
+
+$mobileBreakpointWidth: 900px;
+
+/* Default Styles*/
 
 * {
   font-family: "Onest", sans-serif;
@@ -22,151 +30,262 @@ html, body {
   font-size: 16px;
 }
 
+body {
+  overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+/* Utility Styles */
+.font-weight-bold { font-weight: bold; }
+
+.md {
+  display: none;
+  @media screen and (min-width: $mobileBreakpointWidth) {
+    display: block;
+  }
+}
+.sm-only {
+  display: none;
+  @media screen and (max-width: $mobileBreakpointWidth) {
+    display: block;
+  }
+}
+/* Custom Styles */
+
 .top-bar {
   background-color: $backgroundColor;
-  border-bottom: solid $backgroundColor 2px;
   color: white;
 
   display: flex;
   justify-content: space-between;
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1;
 
-  height: 4rem;
-  width: 100vw;
+  height: $topBarHeight;
+  font-size: 1.66666667rem;
+  font-weight: 400;
 
   margin: 0;
   padding: 1rem;
-
-  .app-name {
-    display: none;
-    @media screen and (min-width: 800px) {
-      display: block;
-    }
-  }
 
   .city-select {
-    display: none;
-
-    @media screen and (min-width: 800px) {
-      display: block;
-    }
+    font-size: 1rem;
   }
 }
 
-.chat {
-  padding-top: 4rem;
+.layout {
+  padding-top: $topBarHeight;
+
+  display: grid;
+  grid-template-areas: 'main';
+
+  @media screen and (min-width: $mobileBreakpointWidth) {
+      grid-template-areas:
+      'aside main main main main main'
+      'aside main main main main main';
+  }
 }
 
-
-.conversation-list {
-  border-right: solid $backgroundColor 2px;
-  // height: 92svh;
-  // overflow: scroll;
+.chat-aside {
+  grid-area: aside;
+  border-right: solid rgba(163, 163, 163, 0.2) 2px;
+  background: #F0F5FF;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 0;
-}
 
-.conversation-overview {
-  overflow: scroll;
-  padding-bottom: 6rem;
-  height: inherit;
-
-  @media screen and (max-width: 480px) {
-    height: auto;
-    border-bottom: solid $backgroundColor 2px;
+  width: 23px;
+  @media screen and (min-width: $mobileBreakpointWidth) {
+    width: auto;
   }
 
-  img {
-    // float: right;
+  .conversation-list {
+    display: none;
+    flex: 0 0 calc(100svh - #{$topBarHeight} - #{$finatixLogoHeight});
+    overflow: auto;
+    
+    @media screen and (min-width: $mobileBreakpointWidth) {
+      display: block;
+    }
+
+    img {
+      // float: right;
+      padding: 1rem;
+      max-width: 50%;
+    }
+
+    p {
+      padding: 0 1rem;
+    }
+
+    .conversation-item {
+      border-bottom: solid rgba(163, 163, 163, 0.2) 1px;
+      padding: 1rem;
+
+      &.active {
+        background-color: #ADD5E3;
+      }
+
+      &:hover {
+        background-color: #BFE5FF;
+        cursor: pointer;
+      }
+
+      .conversation-item-name {
+        font-weight: 700;
+        line-height: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .conversation-preview {
+        font-weight: 400;
+        line-height: 30px;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .conversation-item-name, .conversation-preview {
+        margin: 0;
+      }
+    }
+  }
+
+  .finatix-container {
+    display: none;
+    flex: 0 1 0;
     padding: 1rem;
-    max-width: 50%;
-  }
+    height: $finatixLogoHeight;
 
-  p {
-    padding: 0 1rem;
-  }
-}
+    @media screen and (min-width: $mobileBreakpointWidth) {
+      display: block;
+    }
 
-
-.finatix-container {
-  border-top: solid $backgroundColor 2px;
-  background-color: white;
-  padding: 1rem;
-  height: 2rem;
-  width: auto;
-  // position: absolute;
-  bottom: 0;
-}
-
-.conversation-item {
-  border-bottom: solid $backgroundColor 1px;
-
-  &.active {
-    background-color: #bfe5ff;
-  }
-
-  &:hover {
-    background-color: #BFE5FF;
-    cursor: pointer;
+    img {
+      width: 144px;
+    }
   }
 }
 
 .chat-box {
+  grid-area: main;
   border-radius: 10px;
   margin-bottom: 20px;
-  height: 92svh;
+  height: calc(100svh - #{$topBarHeight});
+  overflow: auto;
+
+  .chat-messages {
+    // overflow: scroll;
+    padding-bottom: 3rem;
+    height: inherit;
+
+    .message-container {
+      padding: 1rem;
+      float: left;
+      clear: both;
+
+      &.ai-message {
+        .message-content {
+          display: inline-block;
+          background-color: $chatBubbleFromAiBackgroundColor;
+          color: #000;
+        }
+      }
+
+      &.user-message {
+        float: right;
+
+        .message-content {
+          display: inline-block;
+          background-color: $chatBubbleFromUserBackgroundColor;
+          color: #000;
+        }
+      }
+
+      .message-content {
+        padding: 10px;
+        margin: 5px;
+        border-radius: 10px;
+        width: 70%;
+        color: #000;
+
+        .message-sender {
+          text-transform: uppercase;
+          font-weight: bold;
+
+          &::after {
+            content: ' - ';
+            display: inline;
+          }
+        }
+
+        .message-time {
+          text-transform: uppercase;
+          font-weight: bold;
+        }
+
+        .message-text {
+          margin-top: 1rem;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
 
   .new-message {
+
+    $borderColor: rgba(163, 163, 163, 1);
+
+    clear: both;
+    display: flex;
+
     background-color: white;
     width: 100%;
-    padding: 1rem 1rem;
-    // position: absolute;
-    bottom: 0;
+    padding: 1.25rem 1rem;
+    margin: 1rem 0;
+    height: 4.5rem;
+
+
+    input {
+      flex: 1 0 0;
+
+      height: 2.875rem;
+      width: 100%;
+      padding: 0 1rem;
+
+      border-radius: 12px 0 0 12px;
+      border-left: 1px solid $borderColor;
+      border-top: 1px solid $borderColor;
+      border-bottom: 1px solid $borderColor;
+      border-right: 0;
+      outline: 0;
+    }
+
+    .input-group-append {
+      flex: 0 1 0;
+
+      button {
+        height: 2.875rem;
+        padding: 0 1rem;
+        text-transform: uppercase;
+
+        background-color: #3496BA;
+        border-radius: 0 12px 12px 0;
+        border-left: 0;
+        border-top: 1px solid $borderColor;
+        border-right: 1px solid $borderColor;
+        border-bottom: 1px solid $borderColor;
+        color: white;
+      }
+    }
   }
-}
-
-.chat-messages {
-  // overflow: scroll;
-  padding-bottom: 3rem;
-  height: inherit;
-}
-
-.message-container {
-  padding: 1rem;
-}
-
-.message-content {
-  padding: 10px;
-  margin: 5px;
-  border-radius: 10px;
-  width: 70%;
-  color: #000;
-}
-
-.user-message {
-  // float: right;
-
-  .message-content {
-    display: inline-block;
-    background-color: #DDDDDD;
-    color: #000;
-  }
-}
-
-.ai-message {
-  // float: left;
-
-  .message-content {
-    display: inline-block;
-    background-color: #8BC9E0;
-    color: #000;
-  }
-
-}
-
-.btn {
-  background-color: $backgroundColor;
-  color: white;
 }
