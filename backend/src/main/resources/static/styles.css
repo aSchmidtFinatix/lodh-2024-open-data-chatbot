@@ -1,9 +1,12 @@
 * {
   font-family: "Onest", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  width: 90vw;
+  margin: 0;
+  padding: 0;
 }
 
 .row.top-bar {
@@ -15,6 +18,8 @@ body {
   height: 4rem;
   width: 100vw;
   z-index: 1;
+  margin: 0;
+  padding: 0;
 }
 
 .row.top-bar h3 {
@@ -23,18 +28,37 @@ body {
   float: left;
 }
 
+#city-context {
+  float: right;
+  margin-top: 1.5rem;
+}
+
 .row.chat {
   padding-top: 4rem;
   position: absolute;
   top: 0;
   height: 90svh;
+  width: 100vw;
   z-index: 0;
 }
 
-.conversation-overview {
+
+#conversation-col {
   border-right: solid #082E51 2px;
   height: 92svh;
   overflow: scroll;
+  margin: 0;
+  padding: 0;
+}
+
+#conversation-overview {
+  overflow: scroll;
+  padding-bottom: 6rem;
+  height: inherit;
+}
+
+#conversation-overview p {
+  padding: 0 1rem;
 }
 
 @media screen and (max-width: 480px) {
@@ -44,17 +68,20 @@ body {
   }
 }
 
-.conversation-overview img {
-  float: right;
-  margin: 1rem;
-  max-width: 50%;
+#finatix-container {
+  border-top: solid #082E51 2px;
+  background-color: white;
+  padding: 1rem;
+  height: 2rem;
+  width: auto;
   position: absolute;
   bottom: 0;
 }
 
-#city-context {
+.conversation-overview img {
   float: right;
-  margin-top: 1rem;
+  padding: 1rem;
+  max-width: 50%;
 }
 
 .conversation-item {
@@ -70,16 +97,16 @@ body {
   cursor: pointer;
 }
 
-.chat-container {
-  position: relative;
-  margin: auto;
-  overflow: scroll;
-}
-
 .chat-box {
   border-radius: 10px;
   margin-bottom: 20px;
+  height: 92svh;
+}
+
+#chat-messages {
   overflow: scroll;
+  padding-bottom: 3rem;
+  height: inherit;
 }
 
 .message-container {
@@ -100,7 +127,6 @@ body {
 
 .user-message .message-content {
   display: inline-block;
-  background-color: #8BC9E0;
   background-color: #DDDDDD;
   color: #000;
 }
@@ -119,7 +145,9 @@ body {
 }
 
 .chat-box .input-group {
+  background-color: white;
   width: 100%;
+  padding: 1rem 1rem;
   position: absolute;
   bottom: 0;
 }
