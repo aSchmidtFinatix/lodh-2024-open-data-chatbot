@@ -101,15 +101,15 @@
                 </div>
             </div>
             <div id="finatix-container">
-<!--                <img alt="Finatix Logo" th:src="@{/assets/powered_by_finatix.png}">-->
-                <img alt="Finatix Logo" src="../static/assets/powered_by_finatix.png">
+                <img alt="Finatix Logo" th:src="@{/assets/powered_by_finatix.png}">
+<!--                <img alt="Finatix Logo" src="../static/assets/powered_by_finatix.png">-->
             </div>
         </div>
         <div class="col-lg-9 col-md-8 chat-box">
             <div id="chat-messages">
                 <div class="message-container ai-message">
-                    <!--                    <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">-->
-                    <img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32">
+                                        <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">
+<!--                    <img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32">-->
                     <div class="message-content">
                         <span class="message-sender font-weight-bold">ODA</span>
                         <span class="font-weight-bold">Gerade eben</span>
@@ -181,9 +181,9 @@
                 </div>
             </div>
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Type your message..."
+                <input type="text" id="message-input" class="form-control" placeholder="Type your message..."
                        aria-label="Type your message" aria-describedby="basic-addon2">
-                <div class="input-group-append">
+                <div id="send-message-button" class="input-group-append">
                     <button class="btn" type="button">Send</button>
                 </div>
             </div>

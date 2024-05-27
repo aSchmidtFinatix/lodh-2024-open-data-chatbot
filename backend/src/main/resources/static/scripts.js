@@ -93,22 +93,43 @@ async function postMessage (conversationToken,message) {
     let result
     fetchDataFromAPI(postConversationsMessagesURL, postConversationsMessagesOptions).then((response) => {
         let answer = response.response
-        addToConversation(answer);
+        addMessageToChat(answer, "ai");
     });
     return result
 }
 
 // Function to send message
-function sendMessage() {
-    let messageInput = document.querySelector('.chat-box input[type="text"]');
+function sendMessage(event) {
+    let messageInput = document.querySelector('#message-input');
     let message = messageInput.value;
-    let chatMessages = document.getElementById('chat-messages');
-    let newMessage = document.createElement('div');
-    newMessage.className = 'message user-message'; // User message
-    newMessage.textContent = message;
-    chatMessages.appendChild(newMessage);
+    addMessageToChat(message, "user");
     messageInput.value = ''; // Clear input field after sending message
     postMessage(conversationToken, message)
+}
+
+function addMessageToChat(message, author) {
+    let chatMessages = document.getElementById('chat-messages');
+    let messageContainer = document.createElement('div');
+    messageContainer.className = 'message-container ' + author + '-message';
+    let authorImage = document.createElement("img");
+    authorImage.className = 'avatar';
+    authorImage.src = "../static/assets/oda_v2_sm.png";
+    authorImage.width = "32";
+    authorImage.height = "32";
+    let messageContent = document.createElement('div');
+    messageContent.className = 'message-content';
+    let senderHeadline = document.createElement('span');
+    senderHeadline.innerText = author === 'user' ? 'Du ' : 'ODA ';
+    let timeHeadline = document.createElement('span');
+    timeHeadline.innerText = new Date().toLocaleTimeString();
+    let messageNode = document.createElement('p');
+    messageNode.innerText = message;
+    messageContent.appendChild(senderHeadline);
+    messageContent.appendChild(timeHeadline);
+    messageContent.appendChild(messageNode);
+    messageContainer.appendChild(authorImage);
+    messageContainer.appendChild(messageContent);
+    chatMessages.appendChild(messageContainer);
 }
 
 function addToConversation(answer) {
@@ -139,7 +160,7 @@ function initializeApp() {
 
 function addEventListeners() {
     // Event listener for send button click
-    document.querySelector('.chat-box button').addEventListener('click', function() {
+    document.querySelector('#send-message-button').addEventListener('click', function() {
         sendMessage(conversationToken);
     });
 
