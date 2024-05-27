@@ -41,6 +41,15 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+.md-inline {
+  display: none;
+}
+@media screen and (min-width: 900px) {
+  .md-inline {
+    display: inline;
+  }
+}
+
 .sm-only {
   display: none;
 }
@@ -103,6 +112,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .top-bar .city-select {
   font-size: 1rem;
+  line-height: 2rem;
 }
 
 .layout {
@@ -226,11 +236,10 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 10px;
   margin-bottom: 20px;
   height: calc(100svh - 4.25rem);
-  overflow: auto;
 }
 .chat-box .chat-messages {
-  padding-bottom: 3rem;
-  height: inherit;
+  overflow: auto;
+  height: calc(100svh - 4.25rem - 5.5rem);
 }
 .chat-box .chat-messages .message-container {
   padding: 1rem;
@@ -279,8 +288,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: white;
   width: 100%;
   padding: 1.25rem 1rem;
-  margin: 1rem 0;
-  height: 4.5rem;
+  height: 5.5rem;
 }
 .chat-box .new-message input {
   flex: 1 0 0;

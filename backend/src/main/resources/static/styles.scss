@@ -11,6 +11,7 @@ $backgroundColor: #082E51;
 $chatBubbleFromAiBackgroundColor: #ADD5E3;
 $chatBubbleFromUserBackgroundColor: #DDD;
 $topBarHeight: 4.25rem;
+$newMessageHeight: 5.5rem;
 $finatixLogoHeight: 5rem;
 
 // loading spinner
@@ -49,6 +50,12 @@ h1, h2, h3, h4, h5, h6 {
   display: none;
   @media screen and (min-width: $mobileBreakpointWidth) {
     display: block;
+  }
+}
+.md-inline {
+  display: none;
+  @media screen and (min-width: $mobileBreakpointWidth) {
+    display: inline;
   }
 }
 .sm-only {
@@ -116,6 +123,7 @@ h1, h2, h3, h4, h5, h6 {
 
   .city-select {
     font-size: 1rem;
+    line-height: 2rem;
   }
 }
 
@@ -257,12 +265,11 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 10px;
   margin-bottom: 20px;
   height: calc(100svh - #{$topBarHeight});
-  overflow: auto;
 
   .chat-messages {
     // overflow: scroll;
-    padding-bottom: 3rem;
-    height: inherit;
+    overflow: auto;
+    height: calc(100svh - #{$topBarHeight} - #{$newMessageHeight});
 
     .message-container {
       padding: 1rem;
@@ -327,8 +334,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: white;
     width: 100%;
     padding: 1.25rem 1rem;
-    margin: 1rem 0;
-    height: 4.5rem;
+    height: $newMessageHeight;
 
 
     input {

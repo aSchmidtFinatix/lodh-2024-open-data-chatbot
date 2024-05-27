@@ -25,7 +25,7 @@
     </div>
     <div class="city-select">
         <form action="/action_page.php">
-            <label for="city" class="md">Wähle eine Stadt:</label>
+            <label for="city" class="md-inline">Wähle eine Stadt:</label>
             <select id="city" name="cars">
                 <option value="Leipzig">Leipzig</option>
                 <option value="Hamburg">Hamburg</option>
@@ -149,14 +149,14 @@
                     <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
                 </div>
             </div>
-            <div class="message-container ai-message">
-                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">
-                <!--img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32"-->
+            <div class="message-container user-message">
                 <div class="message-content">
-                    <span class="message-sender">ODA</span>
+                    <span class="message-sender">Du</span>
                     <span class="message-time">Gerade eben</span>
-                    <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
+                    <p class="message-text">Wie viele Museen gibt es in Leipzig?</p>
                 </div>
+                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/user_avatar.png}" width="32" height="32">
+                <!--img class="avatar" alt="ODA_Avatar" src="../static/assets/user_avatar.png" width="32" height="32"-->
             </div>
             <div class="message-container ai-message">
                 <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">
@@ -175,6 +175,24 @@
                     <span class="message-time">Gerade eben</span>
                     <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
                 </div>
+            </div>
+            <div class="message-container ai-message">
+                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">
+                <!--img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32"-->
+                <div class="message-content">
+                    <span class="message-sender">ODA</span>
+                    <span class="message-time">Gerade eben</span>
+                    <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
+                </div>
+            </div>
+            <div class="message-container user-message">
+                <div class="message-content">
+                    <span class="message-sender">Du</span>
+                    <span class="message-time">Gerade eben</span>
+                    <p class="message-text">Wie viele Museen gibt es in Leipzig?</p>
+                </div>
+                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/user_avatar.png}" width="32" height="32">
+                <!--img class="avatar" alt="ODA_Avatar" src="../static/assets/user_avatar.png" width="32" height="32"-->
             </div>
         </section>
 
