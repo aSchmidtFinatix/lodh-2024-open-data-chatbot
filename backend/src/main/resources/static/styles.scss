@@ -103,6 +103,17 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 1rem;
 
+  .app-name {
+    margin-right: 1rem;
+  }
+
+  .app-name, .app-name *,
+  .conversation-name, .conversation-name * {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .city-select {
     font-size: 1rem;
   }
@@ -242,7 +253,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .chat-box {
-
   grid-area: main;
   border-radius: 10px;
   margin-bottom: 20px;

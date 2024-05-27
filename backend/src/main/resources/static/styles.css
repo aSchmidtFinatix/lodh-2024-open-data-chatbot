@@ -92,6 +92,15 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 1rem;
 }
+.top-bar .app-name {
+  margin-right: 1rem;
+}
+.top-bar .app-name, .top-bar .app-name *,
+.top-bar .conversation-name, .top-bar .conversation-name * {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .top-bar .city-select {
   font-size: 1rem;
 }
