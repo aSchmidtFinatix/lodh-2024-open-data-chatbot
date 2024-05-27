@@ -1,11 +1,15 @@
 async function fetchDataFromAPI(url, options) {
     try {
+        increaseLoadingCounter();
         const response = await fetch(url, options);
-        return await response.json();
+        const json = await response.json();
+        decreaseLoadingCounter();
+        return json;
         //console.log(result.conversationToken);
         //console.log(response.json());
     } catch (error) {
         console.error(error);
+        decreaseLoadingCounter();
     }
 }
 
@@ -137,14 +141,42 @@ function initializeApp() {
     addEventListeners();
 }
 
+let _loadCounter = 0;
+function increaseLoadingCounter() {
+    _loadCounter++;
+    checkLoadingSpinner();
+}
+
+function decreaseLoadingCounter() {
+    _loadCounter--;
+    checkLoadingSpinner();
+}
+
+function checkLoadingSpinner() {
+    const spinner = document.querySelector('.loading-spinner');
+    if (!spinner) { return; }
+
+    spinner.setAttribute('data-counter', `${_loadCounter}`);
+    if (_loadCounter > 0) {
+        spinner.classList.add('active');
+    } else {
+        spinner.classList.remove('active');
+    }
+}
+
 function addEventListeners() {
+    // Event listener for mobile aside toggle
+    document.querySelector('.mobile-toggle').addEventListener('click', () => {
+        document.querySelector('.chat-aside').classList.toggle('visible');
+    });
+
     // Event listener for send button click
-    document.querySelector('.chat-box button').addEventListener('click', function() {
+    document.querySelector('.chat-box button').addEventListener('click', () => {
         sendMessage(conversationToken);
     });
 
     // Event listener for Enter key press
-    document.querySelector('.chat-box input[type="text"]').addEventListener('keypress', function(e) {
+    document.querySelector('.chat-box input[type="text"]').addEventListener('keypress', e => {
         if (e.key === 'Enter') {
             sendMessage();
         }
