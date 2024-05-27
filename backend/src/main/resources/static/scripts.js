@@ -9,8 +9,8 @@ async function fetchDataFromAPI(url, options) {
     }
 }
 
-var postConversationsURL = 'http://localhost:8080/api/conversations'
-var postConversationsOptions = {
+let postConversationsURL = 'http://localhost:8080/api/conversations';
+let postConversationsOptions = {
     method: 'POST',
     headers: {
         'Access-Allow-Origin': "*"
@@ -29,7 +29,7 @@ async function getMessages (conversationToken) {
     result = fetchDataFromAPI(getMessagesURL, getMessagesOptions);
     return result;
 }
-var conversationToken
+let conversationToken
 function establishConversation() {
     // if we don't have conversationToken, make a post and retrieve it. Also when we do have it already, load the list of messages.
     conversationToken = localStorage.getItem('conversationToken');
@@ -62,7 +62,7 @@ function establishConversation() {
             // Add more messages here...
         ];
 
-        var chatMessages = document.getElementById('chat-messages');
+        let chatMessages = document.getElementById('chat-messages');
         messages.forEach(message => {
             const messageElement = document.createElement('div');
             messageElement.textContent = `${message.sender}: ${message.text}`;
