@@ -1,31 +1,158 @@
-/* Custom CSS for pastel blue tones */
+* {
+  font-family: "Onest", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-  background-color: #f0f8ff; /* Light pastel blue */
+  margin: 0;
+  padding: 0;
 }
-.chat-container {
-  max-width: 500px;
-  margin: auto;
+
+.row.top-bar {
+  background-color: #082E51;
+  color: white;
+  position: absolute;
+  top: 0;
+  border-bottom: solid #082E51 2px;
+  height: 4rem;
+  width: 100vw;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
 }
+
+.row.top-bar h3 {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  float: left;
+}
+
+#city-context {
+  float: right;
+  margin-top: 1.5rem;
+}
+
+.row.chat {
+  padding-top: 4rem;
+  position: absolute;
+  top: 0;
+  height: 90svh;
+  width: 100vw;
+  z-index: 0;
+}
+
+
+#conversation-col {
+  border-right: solid #082E51 2px;
+  height: 92svh;
+  overflow: scroll;
+  margin: 0;
+  padding: 0;
+}
+
+#conversation-overview {
+  overflow: scroll;
+  padding-bottom: 6rem;
+  height: inherit;
+}
+
+#conversation-overview p {
+  padding: 0 1rem;
+}
+
+@media screen and (max-width: 480px) {
+  .conversation-overview {
+    height: auto;
+    border-bottom: solid #082E51 2px;
+  }
+}
+
+#finatix-container {
+  border-top: solid #082E51 2px;
+  background-color: white;
+  padding: 1rem;
+  height: 2rem;
+  width: auto;
+  position: absolute;
+  bottom: 0;
+}
+
+.conversation-overview img {
+  float: right;
+  padding: 1rem;
+  max-width: 50%;
+}
+
+.conversation-item {
+  border-bottom: solid #082E51 1px;
+}
+
+.conversation-item.active {
+  background-color: #bfe5ff;
+}
+
+.conversation-item:hover {
+  background-color: #BFE5FF;
+  cursor: pointer;
+}
+
 .chat-box {
   border-radius: 10px;
   margin-bottom: 20px;
+  height: 92svh;
 }
-.user-message {
-  background-color: #add8e6; /* Light pastel blue for user input */
+
+#chat-messages {
+  overflow: scroll;
+  padding-bottom: 3rem;
+  height: inherit;
 }
-.ai-message {
-  background-color: #bfe5ff; /* Slightly darker pastel blue for AI response */
+
+.message-container {
+  padding: 1rem;
 }
-.message {
+
+.message-content {
   padding: 10px;
   margin: 5px;
   border-radius: 10px;
+  width: 70%;
+  color: #000;
 }
-.user-message .message {
-  background-color: #add8e6; /* Light pastel blue for user input */
-  color: #000; /* Black text */
+
+.user-message {
+  float: right;
 }
-.ai-message .message {
-  background-color: #bfe5ff; /* Slightly darker pastel blue for AI response */
-  color: #000; /* Black text */
+
+.user-message .message-content {
+  display: inline-block;
+  background-color: #DDDDDD;
+  color: #000;
+}
+
+.ai-message {
+  float: left;
+}
+
+.ai-message .message-content {
+  display: inline-block;
+  background-color: #8BC9E0;
+  color: #000;
+}
+
+.avatar {
+}
+
+.chat-box .input-group {
+  background-color: white;
+  width: 100%;
+  padding: 1rem 1rem;
+  position: absolute;
+  bottom: 0;
+}
+
+.btn {
+  background-color: #082E51;
+  color: white;
 }
