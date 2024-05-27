@@ -104,7 +104,9 @@ h1, h2, h3, h4, h5, h6 {
 .top-bar .app-name {
   margin-right: 1rem;
 }
-.top-bar .app-name, .top-bar .app-name *,
+.top-bar .app-name, .top-bar .app-name * {
+  white-space: nowrap;
+}
 .top-bar .conversation-name, .top-bar .conversation-name * {
   white-space: nowrap;
   overflow: hidden;
@@ -146,7 +148,7 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 3px 3px 30px rgba(0, 0, 0, 0.5);
 }
 .chat-aside.visible .conversation-list, .chat-aside.visible .finatix-container {
-  display: block;
+  display: flex;
 }
 .chat-aside.visible .mobile-toggle {
   transform: rotateZ(180deg);
@@ -221,14 +223,26 @@ h1, h2, h3, h4, h5, h6 {
   flex: 0 1 0;
   padding: 1rem;
   height: 5rem;
+  justify-content: space-between;
 }
 @media screen and (min-width: 900px) {
   .chat-aside .finatix-container {
-    display: block;
+    display: flex;
   }
 }
 .chat-aside .finatix-container img {
   width: 144px;
+}
+.chat-aside .finatix-container button {
+  width: 3rem;
+  height: 3rem;
+  font-size: 3rem;
+  line-height: calc(3rem / 2);
+  background: #3496BA;
+  border: 0;
+  color: white;
+  border-radius: 10px;
+  font-weight: lighter;
 }
 
 .chat-box {
@@ -240,30 +254,32 @@ h1, h2, h3, h4, h5, h6 {
 .chat-box .chat-messages {
   overflow: auto;
   height: calc(100svh - 4.25rem - 5.5rem);
+  display: flex;
+  flex-direction: column;
 }
 .chat-box .chat-messages .message-container {
   padding: 1rem;
-  float: left;
-  clear: both;
+  display: flex;
+}
+@media screen and (min-width: 900px) {
+  .chat-box .chat-messages .message-container {
+    max-width: 70%;
+  }
 }
 .chat-box .chat-messages .message-container.ai-message .message-content {
-  display: inline-block;
   background-color: #ADD5E3;
-  color: #000;
 }
 .chat-box .chat-messages .message-container.user-message {
-  float: right;
+  align-self: flex-end;
 }
 .chat-box .chat-messages .message-container.user-message .message-content {
-  display: inline-block;
   background-color: #DDD;
-  color: #000;
 }
 .chat-box .chat-messages .message-container .message-content {
+  display: inline-block;
   padding: 10px;
   margin: 5px;
   border-radius: 10px;
-  width: 70%;
   color: #000;
 }
 .chat-box .chat-messages .message-container .message-content .message-sender {

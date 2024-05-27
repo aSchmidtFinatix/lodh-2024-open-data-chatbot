@@ -10,6 +10,7 @@
 $backgroundColor: #082E51;
 $chatBubbleFromAiBackgroundColor: #ADD5E3;
 $chatBubbleFromUserBackgroundColor: #DDD;
+$ctaBackgroundColor: #3496BA;
 $topBarHeight: 4.25rem;
 $newMessageHeight: 5.5rem;
 $finatixLogoHeight: 5rem;
@@ -114,7 +115,10 @@ h1, h2, h3, h4, h5, h6 {
     margin-right: 1rem;
   }
 
-  .app-name, .app-name *,
+  .app-name, .app-name * {
+    white-space: nowrap;
+  }
+
   .conversation-name, .conversation-name * {
     white-space: nowrap;
     overflow: hidden;
@@ -160,7 +164,7 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 3px 3px 30px rgba(0,0,0,0.5);
 
     .conversation-list, .finatix-container {
-      display: block;
+      display: flex;
     }
 
     .mobile-toggle {
@@ -171,7 +175,7 @@ h1, h2, h3, h4, h5, h6 {
   .mobile-toggle {
     display: none;
     cursor: pointer;
-    background: #3496BA;
+    background: $ctaBackgroundColor;
     position: absolute;
     border-radius: 0 4px 4px 0;
     right: 0;
@@ -249,13 +253,27 @@ h1, h2, h3, h4, h5, h6 {
     flex: 0 1 0;
     padding: 1rem;
     height: $finatixLogoHeight;
+    justify-content: space-between;
 
     @media screen and (min-width: $mobileBreakpointWidth) {
-      display: block;
+      display: flex;
     }
 
     img {
       width: 144px;
+    }
+
+    button {
+      $addConversationButtonSize: 3rem;
+      width: $addConversationButtonSize;
+      height: $addConversationButtonSize;
+      font-size: $addConversationButtonSize;
+      line-height: calc(#{ $addConversationButtonSize } / 2);
+      background: $ctaBackgroundColor;
+      border: 0;
+      color: white;
+      border-radius: 10px;
+      font-weight: lighter;
     }
   }
 }
@@ -270,35 +288,34 @@ h1, h2, h3, h4, h5, h6 {
     // overflow: scroll;
     overflow: auto;
     height: calc(100svh - #{$topBarHeight} - #{$newMessageHeight});
+    display: flex;
+    flex-direction: column;
 
     .message-container {
       padding: 1rem;
-      float: left;
-      clear: both;
+      display: flex;
 
-      &.ai-message {
-        .message-content {
-          display: inline-block;
-          background-color: $chatBubbleFromAiBackgroundColor;
-          color: #000;
-        }
+      @media screen and (min-width: $mobileBreakpointWidth) {
+        max-width: 70%;
+      }
+
+      &.ai-message .message-content {
+        background-color: $chatBubbleFromAiBackgroundColor;
       }
 
       &.user-message {
-        float: right;
+        align-self: flex-end;
 
         .message-content {
-          display: inline-block;
           background-color: $chatBubbleFromUserBackgroundColor;
-          color: #000;
         }
       }
 
       .message-content {
+        display: inline-block;
         padding: 10px;
         margin: 5px;
         border-radius: 10px;
-        width: 70%;
         color: #000;
 
         .message-sender {
@@ -360,7 +377,7 @@ h1, h2, h3, h4, h5, h6 {
         padding: 0 1rem;
         text-transform: uppercase;
 
-        background-color: #3496BA;
+        background-color: $ctaBackgroundColor;
         border-radius: 0 12px 12px 0;
         border-left: 0;
         border-top: 1px solid $borderColor;
