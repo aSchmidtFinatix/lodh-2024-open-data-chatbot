@@ -163,8 +163,16 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     box-shadow: 3px 3px 30px rgba(0,0,0,0.5);
 
-    .conversation-list, .finatix-container {
+    .conversation-list {
+      display: block;
+    }
+
+    .finatix-container {
       display: flex;
+    }
+
+    .mini-finatix-logo {
+      display: none;
     }
 
     .mobile-toggle {
@@ -188,6 +196,18 @@ h1, h2, h3, h4, h5, h6 {
     height: 40px;
     line-height: 35px;
     font-size: 2rem;
+
+    @media screen and (max-width: $mobileBreakpointWidth) {
+      display: block;
+    }
+  }
+
+  .mini-finatix-logo {
+    display: none;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
 
     @media screen and (max-width: $mobileBreakpointWidth) {
       display: block;

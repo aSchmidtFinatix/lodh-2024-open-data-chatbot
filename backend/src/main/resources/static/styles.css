@@ -147,8 +147,14 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   box-shadow: 3px 3px 30px rgba(0, 0, 0, 0.5);
 }
-.chat-aside.visible .conversation-list, .chat-aside.visible .finatix-container {
+.chat-aside.visible .conversation-list {
+  display: block;
+}
+.chat-aside.visible .finatix-container {
   display: flex;
+}
+.chat-aside.visible .mini-finatix-logo {
+  display: none;
 }
 .chat-aside.visible .mobile-toggle {
   transform: rotateZ(180deg);
@@ -171,6 +177,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 @media screen and (max-width: 900px) {
   .chat-aside .mobile-toggle {
+    display: block;
+  }
+}
+.chat-aside .mini-finatix-logo {
+  display: none;
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media screen and (max-width: 900px) {
+  .chat-aside .mini-finatix-logo {
     display: block;
   }
 }
