@@ -7,6 +7,8 @@
  *
  */
 
+$backgroundColor: #082E51;
+
 * {
   font-family: "Onest", sans-serif;
   margin: 0;
@@ -17,11 +19,12 @@
 html, body {
   margin: 0;
   padding: 0;
+  font-size: 16px;
 }
 
 .top-bar {
-  background-color: #082E51;
-  border-bottom: solid #082E51 2px;
+  background-color: $backgroundColor;
+  border-bottom: solid $backgroundColor 2px;
   color: white;
 
   display: flex;
@@ -43,10 +46,6 @@ html, body {
     }
   }
 
-  .conversation-name {
-
-  }
-
   .city-select {
     display: none;
 
@@ -58,55 +57,51 @@ html, body {
 
 .chat {
   padding-top: 4rem;
-  top: 0;
-  height: 90svh;
-  width: 100vw;
-  z-index: 0;
 }
 
 
-#conversation-col {
-  border-right: solid #082E51 2px;
-  height: 92svh;
-  overflow: scroll;
+.conversation-list {
+  border-right: solid $backgroundColor 2px;
+  // height: 92svh;
+  // overflow: scroll;
   margin: 0;
   padding: 0;
 }
 
-#conversation-overview {
+.conversation-overview {
   overflow: scroll;
   padding-bottom: 6rem;
   height: inherit;
 
   @media screen and (max-width: 480px) {
     height: auto;
-    border-bottom: solid #082E51 2px;
+    border-bottom: solid $backgroundColor 2px;
   }
 
   img {
-    float: right;
+    // float: right;
     padding: 1rem;
     max-width: 50%;
   }
+
+  p {
+    padding: 0 1rem;
+  }
 }
 
-#conversation-overview p {
-  padding: 0 1rem;
-}
 
-#finatix-container {
-  border-top: solid #082E51 2px;
+.finatix-container {
+  border-top: solid $backgroundColor 2px;
   background-color: white;
   padding: 1rem;
   height: 2rem;
   width: auto;
-  position: absolute;
+  // position: absolute;
   bottom: 0;
 }
 
-
 .conversation-item {
-  border-bottom: solid #082E51 1px;
+  border-bottom: solid $backgroundColor 1px;
 
   &.active {
     background-color: #bfe5ff;
@@ -123,17 +118,17 @@ html, body {
   margin-bottom: 20px;
   height: 92svh;
 
-  .input-group {
+  .new-message {
     background-color: white;
     width: 100%;
     padding: 1rem 1rem;
-    position: absolute;
+    // position: absolute;
     bottom: 0;
   }
 }
 
-#chat-messages {
-  overflow: scroll;
+.chat-messages {
+  // overflow: scroll;
   padding-bottom: 3rem;
   height: inherit;
 }
@@ -151,7 +146,7 @@ html, body {
 }
 
 .user-message {
-  float: right;
+  // float: right;
 
   .message-content {
     display: inline-block;
@@ -161,7 +156,7 @@ html, body {
 }
 
 .ai-message {
-  float: left;
+  // float: left;
 
   .message-content {
     display: inline-block;
@@ -172,6 +167,6 @@ html, body {
 }
 
 .btn {
-  background-color: #082E51;
+  background-color: $backgroundColor;
   color: white;
 }
