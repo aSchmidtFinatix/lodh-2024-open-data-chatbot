@@ -113,7 +113,7 @@ function addMessageToChat(message, author) {
     messageContainer.className = 'message-container ' + author + '-message';
     let authorImage = document.createElement("img");
     authorImage.className = 'avatar';
-    authorImage.src = "../static/assets/oda_v2_sm.png";
+    authorImage.src = author === "user" ? "../static/assets/user_sm.png" : "../static/assets/oda_v2_sm.png";
     authorImage.width = "32";
     authorImage.height = "32";
     let messageContent = document.createElement('div');
@@ -127,7 +127,8 @@ function addMessageToChat(message, author) {
     messageContent.appendChild(senderHeadline);
     messageContent.appendChild(timeHeadline);
     messageContent.appendChild(messageNode);
-    messageContainer.appendChild(authorImage);
+    if(author === "user") messageContainer.appendChild(authorImage);
+    if(author === "ai") messageContainer.appendChild(authorImage);
     messageContainer.appendChild(messageContent);
     chatMessages.appendChild(messageContainer);
 }
