@@ -11,6 +11,24 @@ paths:
           description: Successful operation
           schema:
             $ref: '#/definitions/ConversationResponse'
+    get:
+      summary: Get conversations by tokens
+      parameters:
+        - name: tokens
+          in: query
+          description: List of conversation tokens
+          required: true
+          type: array
+          items:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: Successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PastConversation'
   /api/conversations/{conversationToken}/messages:
     post:
       summary: Send a message in a conversation
@@ -32,11 +50,11 @@ paths:
           description: Successful operation
           schema:
             $ref: '#/definitions/ConversationResponse'
-  /api/conversations/{sessionToken}:
+  /api/conversations/{conversationToken}:
     get:
       summary: Get conversation details
       parameters:
-        - name: sessionToken
+        - name: conversationToken
           in: path
           description: Token of the conversation session
           required: true
@@ -46,7 +64,7 @@ paths:
         200:
           description: Successful operation
           schema:
-            $ref: '#/definitions/ConversationResponse'
+            $ref: '#/definitions/Conversation'
 definitions:
   UserMessage:
     type: object
@@ -83,7 +101,14 @@ definitions:
         type: string
       timestamp:
         type: string
-      conversation :
+      conversation:
         type: string
         format: uuid
-
+  PastConversation:
+    type: object
+    properties:
+      title:
+        type: string
+      id:
+        type: string
+        format: uuid

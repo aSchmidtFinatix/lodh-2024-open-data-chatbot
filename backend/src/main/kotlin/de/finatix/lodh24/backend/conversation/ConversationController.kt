@@ -29,7 +29,7 @@ class ConversationController(private val conversationService: ConversationServic
         return conversationService.getConversation(conversationToken)
     }
 
-    @GetMapping("/")
+    @GetMapping()
     fun getConversations(@RequestParam("tokens") tokens: List<UUID>): List<PastConversation> {
         val conversations = conversationService.getPastConversations(tokens)
 
