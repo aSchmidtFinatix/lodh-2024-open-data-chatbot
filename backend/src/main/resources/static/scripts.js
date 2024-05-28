@@ -108,32 +108,41 @@ function sendMessage(event) {
     let message = messageInput.value;
     addMessageToChat(message, "user");
     messageInput.value = ''; // Clear input field after sending message
-    postMessage(conversationToken, message)
+    postMessage(conversationToken, message);
 }
 
 function addMessageToChat(message, author) {
     let chatMessages = document.getElementById('chat-messages');
     let messageContainer = document.createElement('div');
     messageContainer.className = 'message-container ' + author + '-message';
-    let authorImage = document.createElement("img");
+    let authorImage = (() => {
+        if (author === "user") {
+            let userImage = document.querySelector("#user-blueprint");
+            return userImage.cloneNode(true);
+        } else {
+            let aiImage = document.querySelector("#oda-blueprint");
+            return aiImage.cloneNode(true);
+        }
+    })();
+    authorImage.id = "";
     authorImage.className = 'avatar';
-    authorImage.src = author === "user" ? "../static/assets/user_sm.png" : "../static/assets/oda_v2_sm.png";
-    authorImage.width = "32";
-    authorImage.height = "32";
+    authorImage.style.display = "";
     let messageContent = document.createElement('div');
     messageContent.className = 'message-content';
     let senderHeadline = document.createElement('span');
-    senderHeadline.innerText = author === 'user' ? 'Du ' : 'ODA ';
+    senderHeadline.className = 'message-sender';
+    senderHeadline.innerText = author === 'user' ? 'Du' : 'ODA';
     let timeHeadline = document.createElement('span');
+    timeHeadline.className = 'message-time';
     timeHeadline.innerText = new Date().toLocaleTimeString();
     let messageNode = document.createElement('p');
     messageNode.innerText = message;
     messageContent.appendChild(senderHeadline);
     messageContent.appendChild(timeHeadline);
     messageContent.appendChild(messageNode);
-    if(author === "user") messageContainer.appendChild(authorImage);
     if(author === "ai") messageContainer.appendChild(authorImage);
     messageContainer.appendChild(messageContent);
+    if(author === "user") messageContainer.appendChild(authorImage);
     chatMessages.appendChild(messageContainer);
 }
 
@@ -150,7 +159,7 @@ function addToConversation(answer) {
 
 waitForElements()
 function waitForElements() {
-    let chatboxButton = document.querySelector('.chat-box button');
+    let chatboxButton = document.querySelector('#chat-box button');
     if(!chatboxButton) {
         setTimeout(waitForElements, 200);
     } else {
@@ -198,7 +207,7 @@ function addEventListeners() {
     });
 
     // Event listener for Enter key press
-    document.querySelector('.chat-box input[type="text"]').addEventListener('keypress', e => {
+    document.querySelector('#message-input').addEventListener('keypress', e => {
         if (e.key === 'Enter') {
             sendMessage();
         }

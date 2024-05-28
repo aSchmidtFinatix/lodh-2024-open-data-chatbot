@@ -15,6 +15,8 @@
     <!--script-- type="text/javascript" src="../static/scripts.js"></script-->
 </head>
 <body>
+<img id="oda-blueprint" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32" style="display: none">
+<img id="user-blueprint" alt="USER_Avatar" th:src="@{/assets/user_avatar.png}" width="32" height="32" style="display: none">
 <header class="top-bar">
     <div class="app-name">
         <h3 class="md">Open Data Assistant</h3>
@@ -42,56 +44,56 @@
         <section class="conversation-list">
             <article class="conversation-item active">
                 <p class="conversation-item-name font-weight-bold">Conversation-1</p>
-                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>
+                <p class="conversation-preview">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig...</p>
             </article>
-            <article class="conversation-item">
-                <p class="conversation-item-name font-weight-bold">Conversation-2</p>
-                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>
-            </article>
-            <article class="conversation-item">
-                <p class="conversation-item-name font-weight-bold">Conversation-3</p>
-                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>
-            </article>
-            <article class="conversation-item">
-                <p class="conversation-item-name font-weight-bold">Conversation-4</p>
-                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>
-            </article>
-            <article class="conversation-item">
-                <p class="conversation-item-name font-weight-bold">Conversation-5</p>
-                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>
-            </article>
-            <article class="conversation-item">
-                <p class="conversation-item-name font-weight-bold">Conversation-6</p>
-                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>
-            </article>
-            <article class="conversation-item">
-                <p class="conversation-item-name font-weight-bold">Conversation-7</p>
-                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>
-            </article>
-            <article class="conversation-item">
-                <p class="conversation-item-name font-weight-bold">Conversation-2</p>
-                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>
-            </article>
-            <article class="conversation-item">
-                <p class="conversation-item-name font-weight-bold">Conversation-2</p>
-                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>
-            </article>
-            <article class="conversation-item">
-                <p class="conversation-item-name font-weight-bold">Conversation-2</p>
-                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>
-            </article>
-            <article class="conversation-item">
-                <p class="conversation-item-name font-weight-bold">Conversation-2</p>
-                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>
-            </article>
-            <article class="conversation-item">
-                <p class="conversation-item-name font-weight-bold">Conversation-2</p>
-                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>
-            </article>
-            <article class="conversation-item">
-                <p class="conversation-item-name font-weight-bold">Conversation-2</p>
-                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>
-            </article>
+<!--            <article class="conversation-item">-->
+<!--                <p class="conversation-item-name font-weight-bold">Conversation-2</p>-->
+<!--                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>-->
+<!--            </article>-->
+<!--            <article class="conversation-item">-->
+<!--                <p class="conversation-item-name font-weight-bold">Conversation-3</p>-->
+<!--                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>-->
+<!--            </article>-->
+<!--            <article class="conversation-item">-->
+<!--                <p class="conversation-item-name font-weight-bold">Conversation-4</p>-->
+<!--                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>-->
+<!--            </article>-->
+<!--            <article class="conversation-item">-->
+<!--                <p class="conversation-item-name font-weight-bold">Conversation-5</p>-->
+<!--                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>-->
+<!--            </article>-->
+<!--            <article class="conversation-item">-->
+<!--                <p class="conversation-item-name font-weight-bold">Conversation-6</p>-->
+<!--                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>-->
+<!--            </article>-->
+<!--            <article class="conversation-item">-->
+<!--                <p class="conversation-item-name font-weight-bold">Conversation-7</p>-->
+<!--                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>-->
+<!--            </article>-->
+<!--            <article class="conversation-item">-->
+<!--                <p class="conversation-item-name font-weight-bold">Conversation-2</p>-->
+<!--                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>-->
+<!--            </article>-->
+<!--            <article class="conversation-item">-->
+<!--                <p class="conversation-item-name font-weight-bold">Conversation-2</p>-->
+<!--                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>-->
+<!--            </article>-->
+<!--            <article class="conversation-item">-->
+<!--                <p class="conversation-item-name font-weight-bold">Conversation-2</p>-->
+<!--                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>-->
+<!--            </article>-->
+<!--            <article class="conversation-item">-->
+<!--                <p class="conversation-item-name font-weight-bold">Conversation-2</p>-->
+<!--                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>-->
+<!--            </article>-->
+<!--            <article class="conversation-item">-->
+<!--                <p class="conversation-item-name font-weight-bold">Conversation-2</p>-->
+<!--                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>-->
+<!--            </article>-->
+<!--            <article class="conversation-item">-->
+<!--                <p class="conversation-item-name font-weight-bold">Conversation-2</p>-->
+<!--                <p class="conversation-preview">Here is a preview of a long text message that was sent lastly.</p>-->
+<!--            </article>-->
         </section>
         <div class="finatix-container">
             <img alt="Finatix Logo" th:src="@{/assets/powered_by_finatix.png}">
@@ -103,12 +105,12 @@
             <img alt="Finatix" th:src="@{/assets/mini-finatix.png}">
         </div>
     </aside>
-    <main class="chat-box">
+    <main id="chat-box">
         <svg class="loading-spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
             <circle class="loading-spinner__path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
         </svg>
 
-        <section class="chat-messages">
+        <section id="chat-messages">
             <div class="message-container ai-message">
                 <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">
                 <!--img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32"-->
@@ -118,94 +120,94 @@
                     <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
                 </div>
             </div>
-            <div class="message-container user-message">
-                <div class="message-content">
-                    <span class="message-sender">Du</span>
-                    <span class="message-time">Gerade eben</span>
-                    <p class="message-text">Wie viele Museen gibt es in Leipzig?</p>
-                </div>
-                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/user_avatar.png}" width="32" height="32">
-                <!--img class="avatar" alt="ODA_Avatar" src="../static/assets/user_avatar.png" width="32" height="32"-->
-            </div>
-            <div class="message-container ai-message">
-                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">
-                <!--img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32"-->
-                <div class="message-content">
-                    <span class="message-sender">ODA</span>
-                    <span class="message-time">Gerade eben</span>
-                    <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
-                </div>
-            </div>
-            <div class="message-container ai-message">
-                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">
-                <!--img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32"-->
-                <div class="message-content">
-                    <span class="message-sender">ODA</span>
-                    <span class="message-time">Gerade eben</span>
-                    <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
-                </div>
-            </div>
-            <div class="message-container ai-message">
-                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">
-                <!--img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32"-->
-                <div class="message-content">
-                    <span class="message-sender">ODA</span>
-                    <span class="message-time">Gerade eben</span>
-                    <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
-                </div>
-            </div>
-            <div class="message-container user-message">
-                <div class="message-content">
-                    <span class="message-sender">Du</span>
-                    <span class="message-time">Gerade eben</span>
-                    <p class="message-text">Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien. Es ist ein paradiesmatisches Land, in dem einem gebratene Satzteile in den Mund fliegen. Nicht einmal von der allmächtigen Interpunktion werden die Blindtexte beherrscht – ein geradezu unorthographisches Leben. Eines Tages aber beschloß eine kleine Zeile Blindtext, ihr Name war Lorem Ipsum, hinaus zu gehen in die weite Grammatik. Der große Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli, doch das Blindtextchen ließ sich nicht beirren. Es packte seine sieben Versalien, schob sich sein Initial in den Gürtel und machte sich auf den Weg. Als es die ersten Hügel des Kursivgebirges erklommen hatte, warf es einen letzten Blick zurück auf die Skyline seiner Heimatstadt Buchstabhausen, die Headline von Alphabetdorf und die Subline seiner eigenen Straße, der Zeilengasse. Wehmütig lief ihm eine rhetorische Frage über die Wange, dann setzte es seinen Weg fort. Unterwegs traf es eine Copy. Die Copy warnte das Blindtextchen, da, wo sie herkäme wäre sie?</p>
-                </div>
-                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/user_avatar.png}" width="32" height="32">
-                <!--img class="avatar" alt="ODA_Avatar" src="../static/assets/user_avatar.png" width="32" height="32"-->
-            </div>
-            <div class="message-container ai-message">
-                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">
-                <!--img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32"-->
-                <div class="message-content">
-                    <span class="message-sender">ODA</span>
-                    <span class="message-time">Gerade eben</span>
-                    <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
-                </div>
-            </div>
-            <div class="message-container ai-message">
-                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">
-                <!--img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32"-->
-                <div class="message-content">
-                    <span class="message-sender">ODA</span>
-                    <span class="message-time">Gerade eben</span>
-                    <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
-                </div>
-            </div>
-            <div class="message-container ai-message">
-                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">
-                <!--img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32"-->
-                <div class="message-content">
-                    <span class="message-sender">ODA</span>
-                    <span class="message-time">Gerade eben</span>
-                    <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>
-                </div>
-            </div>
-            <div class="message-container user-message">
-                <div class="message-content">
-                    <span class="message-sender">Du</span>
-                    <span class="message-time">Gerade eben</span>
-                    <p class="message-text">Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien?</p>
-                </div>
-                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/user_avatar.png}" width="32" height="32">
-                <!--img class="avatar" alt="ODA_Avatar" src="../static/assets/user_avatar.png" width="32" height="32"-->
-            </div>
+<!--            <div class="message-container user-message">-->
+<!--                <div class="message-content">-->
+<!--                    <span class="message-sender">Du</span>-->
+<!--                    <span class="message-time">Gerade eben</span>-->
+<!--                    <p class="message-text">Wie viele Museen gibt es in Leipzig?</p>-->
+<!--                </div>-->
+<!--                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/user_avatar.png}" width="32" height="32">-->
+<!--                &lt;!&ndash;img class="avatar" alt="ODA_Avatar" src="../static/assets/user_avatar.png" width="32" height="32"&ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="message-container ai-message">-->
+<!--                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">-->
+<!--                &lt;!&ndash;img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32"&ndash;&gt;-->
+<!--                <div class="message-content">-->
+<!--                    <span class="message-sender">ODA</span>-->
+<!--                    <span class="message-time">Gerade eben</span>-->
+<!--                    <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="message-container ai-message">-->
+<!--                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">-->
+<!--                &lt;!&ndash;img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32"&ndash;&gt;-->
+<!--                <div class="message-content">-->
+<!--                    <span class="message-sender">ODA</span>-->
+<!--                    <span class="message-time">Gerade eben</span>-->
+<!--                    <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="message-container ai-message">-->
+<!--                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">-->
+<!--                &lt;!&ndash;img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32"&ndash;&gt;-->
+<!--                <div class="message-content">-->
+<!--                    <span class="message-sender">ODA</span>-->
+<!--                    <span class="message-time">Gerade eben</span>-->
+<!--                    <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="message-container user-message">-->
+<!--                <div class="message-content">-->
+<!--                    <span class="message-sender">Du</span>-->
+<!--                    <span class="message-time">Gerade eben</span>-->
+<!--                    <p class="message-text">Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien. Es ist ein paradiesmatisches Land, in dem einem gebratene Satzteile in den Mund fliegen. Nicht einmal von der allmächtigen Interpunktion werden die Blindtexte beherrscht – ein geradezu unorthographisches Leben. Eines Tages aber beschloß eine kleine Zeile Blindtext, ihr Name war Lorem Ipsum, hinaus zu gehen in die weite Grammatik. Der große Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli, doch das Blindtextchen ließ sich nicht beirren. Es packte seine sieben Versalien, schob sich sein Initial in den Gürtel und machte sich auf den Weg. Als es die ersten Hügel des Kursivgebirges erklommen hatte, warf es einen letzten Blick zurück auf die Skyline seiner Heimatstadt Buchstabhausen, die Headline von Alphabetdorf und die Subline seiner eigenen Straße, der Zeilengasse. Wehmütig lief ihm eine rhetorische Frage über die Wange, dann setzte es seinen Weg fort. Unterwegs traf es eine Copy. Die Copy warnte das Blindtextchen, da, wo sie herkäme wäre sie?</p>-->
+<!--                </div>-->
+<!--                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/user_avatar.png}" width="32" height="32">-->
+<!--                &lt;!&ndash;img class="avatar" alt="ODA_Avatar" src="../static/assets/user_avatar.png" width="32" height="32"&ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="message-container ai-message">-->
+<!--                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">-->
+<!--                &lt;!&ndash;img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32"&ndash;&gt;-->
+<!--                <div class="message-content">-->
+<!--                    <span class="message-sender">ODA</span>-->
+<!--                    <span class="message-time">Gerade eben</span>-->
+<!--                    <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="message-container ai-message">-->
+<!--                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">-->
+<!--                &lt;!&ndash;img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32"&ndash;&gt;-->
+<!--                <div class="message-content">-->
+<!--                    <span class="message-sender">ODA</span>-->
+<!--                    <span class="message-time">Gerade eben</span>-->
+<!--                    <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="message-container ai-message">-->
+<!--                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/oda_v2_sm.png}" width="32" height="32">-->
+<!--                &lt;!&ndash;img class="avatar" alt="ODA_Avatar" src="../static/assets/oda_v2_sm.png" width="32" height="32"&ndash;&gt;-->
+<!--                <div class="message-content">-->
+<!--                    <span class="message-sender">ODA</span>-->
+<!--                    <span class="message-time">Gerade eben</span>-->
+<!--                    <p class="message-text">Hallo! Ich bin ODA, die Open Data Assistant der Stadt Leipzig. Ich helfe Dir gerne beim Durchsuchen der Open Data Kataloge der Partnerstädte Leipzig, Hamburg, Berlin und München. Wähle dazu oben rechts deine gewünschte Stadt aus.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="message-container user-message">-->
+<!--                <div class="message-content">-->
+<!--                    <span class="message-sender">Du</span>-->
+<!--                    <span class="message-time">Gerade eben</span>-->
+<!--                    <p class="message-text">Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien?</p>-->
+<!--                </div>-->
+<!--                <img class="avatar" alt="ODA_Avatar" th:src="@{/assets/user_avatar.png}" width="32" height="32">-->
+<!--                &lt;!&ndash;img class="avatar" alt="ODA_Avatar" src="../static/assets/user_avatar.png" width="32" height="32"&ndash;&gt;-->
+<!--            </div>-->
         </section>
 
         <section class="new-message">
-            <input type="text" class="form-control" placeholder="Type your message..."
+            <input type="text" id="message-input" class="form-control" placeholder="Type your message..."
                    aria-label="Type your message" aria-describedby="basic-addon2">
             <div class="input-group-append">
-                <button class="btn" type="button">Send</button>
+                <button id="send-message-button" class="btn" type="button">Send</button>
             </div>
         </section>
     </main>

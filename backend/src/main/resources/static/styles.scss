@@ -74,9 +74,10 @@ h1, h2, h3, h4, h5, h6 {
   display: none;
 
   animation: rotator $duration linear infinite;
-  position: fixed;
-  left: 50%;
-  top: 50%;
+  position: relative;
+  left: 45%;
+  top: 45%;
+  z-index: 999;
 
   &.active {
     display: block;
@@ -298,13 +299,13 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.chat-box {
+#chat-box {
   grid-area: main;
   border-radius: 10px;
   margin-bottom: 20px;
   height: calc(100svh - #{$topBarHeight});
 
-  .chat-messages {
+  #chat-messages {
     // overflow: scroll;
     overflow: auto;
     height: calc(100svh - #{$topBarHeight} - #{$newMessageHeight});
