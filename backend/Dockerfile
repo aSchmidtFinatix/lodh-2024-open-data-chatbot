@@ -14,4 +14,4 @@ RUN ./gradlew clean build
 EXPOSE 8080
 
 # Run the JAR file
-CMD ["java", "-jar", "build/libs/lodh24.backend-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-Xmx2g", "-Xms1g", "-jar", "build/libs/lodh24.backend-0.0.1-SNAPSHOT.jar"]

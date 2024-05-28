@@ -30,5 +30,5 @@ spring:
     locations: classpath:db/migration
     baseline-on-migrate: true
   dataimport:
-    enabled: true
+    enabled: ${DATAIMPORT_ENABLED}
 
