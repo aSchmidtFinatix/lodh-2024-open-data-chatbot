@@ -38,7 +38,7 @@ class OpenAiService {
 
     private val logger = LoggerFactory.getLogger(OpenAiService::class.java)
 
-    fun generateResponse(message: String, conversation: Conversation): ChatResponse {
+    fun generateResponse(message: String, conversation: Conversation): String {
         val messages = conversation.messages.map { it.text }
 
         val selectedMessages = selectChatMessages(messages)
@@ -55,22 +55,18 @@ class OpenAiService {
                 Your name is ODA (Open Data Assistant). Your role is to identify relevant data sources from SOURCE  
                 that citizens are seeking and ask clarifying questions based on the $context provided.
                 Respond to their inquiries in the original language of the MESSAGE $message. 
-                If uncertain about an answer, politely indicate that you're unable to provide it. 
-                If the context has nothing to do with the message ignore the context
+                If uncertain about an answer, politely indicate that you're unable to provide it but try to use documents from the Chathistory if you can.
+                If you cant find any data about the inquiries state the datasets that you have with source. Always state the datasets with source.
             """.trimIndent()
         )
 
         val userPrompt = UserMessage(message)
 
-        val chatMessages = selectedMessages.map { UserMessage(it) } + sysPrompt + userPrompt
+        val chatMessages = selectedMessages.map { UserMessage(it) } + userPrompt + sysPrompt
 
         val analysis = client.call(Prompt(chatMessages, options))
 
-        if (!analysis.result.output.content.contains(source)) {
-            analysis.result.output.content.plus("SOURCE : $source")
-        }
-
-        return analysis
+        return analysis.result.output.content
     }
 
     fun saveDataSet(dataSpec: String, dataSet: DataSet) = runBlocking {
@@ -80,7 +76,6 @@ class OpenAiService {
 
         val tokensRequired = estimateTokens(requestText)
         val tokensUsed = tokenTracker.getTokensUsedInLastMinute()
-        logger.info("$tokensRequired | $tokensUsed | ${tokensUsed + tokensRequired}")
         if (tokensUsed + tokensRequired > tokenLimitPerMinute) {
             logger.warn("Tokenlimit überschritten für beschreibung $requestText")
             return@runBlocking

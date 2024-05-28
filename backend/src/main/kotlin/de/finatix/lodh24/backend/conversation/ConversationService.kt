@@ -76,8 +76,7 @@ class ConversationService {
     }
 
     private fun generateResponse(message: String, conversation: Conversation): String {
-        val answer = openAiService.generateResponse(message,conversation)
-        return answer.result.output.content
+        return openAiService.generateResponse(message,conversation)
     }
 
     private fun getCurrentTimestamp(): String {
