@@ -8,16 +8,28 @@ services:
     restart: always
     ports:
       - "8080:8080"
-    env_file:
-      - ../.env
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      SPRING_PROFILES_ACTIVE: prod
+      VDB_PASSWORD: ${VDB_PASSWORD}
+      VDB_USER: ${VDB_USER}
+      VDB_URL: milvus-standalone
+      VDB_PORT: 19530
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_TABLE: ${DB_TABLE}
+      DB_URL: postgres
+      DB_PORT: 5432
+      DATA_IMPORT_ENABLED: true
+
   postgres:
     container_name: postgres
     image: postgres:16
     restart: always
     environment:
-      POSTGRES_DB: conversation
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ${DB_TABLE}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
@@ -45,8 +57,8 @@ services:
     image: minio/minio:RELEASE.2023-03-20T20-16-18Z
     restart: always
     environment:
-      MINIO_ACCESS_KEY: minioadmin
-      MINIO_SECRET_KEY: minioadmin
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
     ports:
       - "9001:9001"
       - "9000:9000"
@@ -84,22 +96,18 @@ services:
       - "etcd"
       - "minio"
 
-  caddy:
-    container_name: caddy
-    image: caddy:2-alpine
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./data/caddy/Caddyfile:/etc/caddy/Caddyfile
+#  caddy:
+#    container_name: caddy
+#    image: caddy:2-alpine
+#    restart: always
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#    volumes:
+#      - ./data/caddy/Caddyfile:/etc/caddy/Caddyfile
 
 volumes:
   postgres-data:
   milvus-etcd-data:
   milvus-data:
   minio-data:
-
-networks:
-  default:
-    name: milvus
