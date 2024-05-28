@@ -20,7 +20,7 @@ services:
       DB_TABLE: ${DB_TABLE}
       DB_URL: postgres
       DB_PORT: 5432
-      DATA_IMPORT_ENABLED: true
+      DATAIMPORT_ENABLED: true
 
   postgres:
     container_name: postgres
