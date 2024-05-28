@@ -4,7 +4,7 @@ spring:
       milvus:
         client:
           host: ${VDB_URL}
-          port: 19530
+          port: ${VDB_PORT}
           username: ${VDB_USER}
           password: ${VDB_PASSWORD}
         databaseName: "default"
@@ -17,7 +17,7 @@ spring:
     retry:
       max-attempts: 1
   datasource:
-    url: jdbc:postgresql://localhost:5432/conversation
+    url: jdbc:postgresql://${DB_URL}:${DB_PORT}/conversation
     username: ${DB_USER}
     password: ${DB_PASSWORD}
   jpa:
