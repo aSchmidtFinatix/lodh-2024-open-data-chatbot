@@ -1,0 +1,7 @@
+{
+    email a.schmidt@finatix.de
+}
+
+dein-oda.de {
+    reverse_proxy backend:8080
+}
