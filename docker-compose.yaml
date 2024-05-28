@@ -1,8 +1,17 @@
 version: '3.8'
 
 services:
+  backend:
+    container_name: backend
+    build:
+      context: backend
+    ports:
+      - "8080:8080"
+    env_file:
+      - ../.env
   postgres:
-    image: postgres:latest
+    container_name: postgres
+    image: postgres:16
     restart: always
     environment:
       POSTGRES_DB: conversation
@@ -30,47 +39,55 @@ services:
       retries: 3
 
   minio:
-      container_name: milvus-minio
-      image: minio/minio:RELEASE.2023-03-20T20-16-18Z
-      environment:
-        MINIO_ACCESS_KEY: minioadmin
-        MINIO_SECRET_KEY: minioadmin
-      ports:
-        - "9001:9001"
-        - "9000:9000"
-      volumes:
-        - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/minio:/minio_data
-      command: minio server /minio_data --console-address ":9001"
-      healthcheck:
-        test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
-        interval: 30s
-        timeout: 20s
-        retries: 3
+    container_name: milvus-minio
+    image: minio/minio:RELEASE.2023-03-20T20-16-18Z
+    environment:
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - "9001:9001"
+      - "9000:9000"
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/minio:/minio_data
+    command: minio server /minio_data --console-address ":9001"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
 
   standalone:
-      container_name: milvus-standalone
-      image: milvusdb/milvus:v2.4.1
-      command: [ "milvus", "run", "standalone" ]
-      security_opt:
-        - seccomp:unconfined
-      environment:
-        ETCD_ENDPOINTS: etcd:2379
-        MINIO_ADDRESS: minio:9000
-      volumes:
-        - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
-      healthcheck:
-        test: [ "CMD", "curl", "-f", "http://localhost:9091/healthz" ]
-        interval: 30s
-        start_period: 90s
-        timeout: 20s
-        retries: 3
-      ports:
-        - "19530:19530"
-        - "9091:9091"
-      depends_on:
-        - "etcd"
-        - "minio"
-
+    container_name: milvus-standalone
+    image: milvusdb/milvus:v2.4.1
+    command: [ "milvus", "run", "standalone" ]
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+    volumes:
+      - ${DOCKER_VOLUME_DIRECTORY:-.}/volumes/milvus:/var/lib/milvus
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9091/healthz" ]
+      interval: 30s
+      start_period: 90s
+      timeout: 20s
+      retries: 3
+    ports:
+      - "19530:19530"
+      - "9091:9091"
+    depends_on:
+      - "etcd"
+      - "minio"
+  caddy:
+    container_name: caddy
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./data/caddy/Caddyfile:/etc/caddy/Caddyfile
 
 volumes:
   postgres-data:
@@ -78,4 +95,3 @@ volumes:
 networks:
   default:
     name: milvus
-
