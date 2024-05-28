@@ -1,16 +1,20 @@
 async function fetchDataFromAPI(url, options) {
     try {
+        increaseLoadingCounter();
         const response = await fetch(url, options);
-        return await response.json();
+        const json = await response.json();
+        decreaseLoadingCounter();
+        return json;
         //console.log(result.conversationToken);
         //console.log(response.json());
     } catch (error) {
         console.error(error);
+        decreaseLoadingCounter();
     }
 }
 
-var postConversationsURL = 'http://localhost:8080/api/conversations'
-var postConversationsOptions = {
+let postConversationsURL = 'http://localhost:8080/api/conversations';
+let postConversationsOptions = {
     method: 'POST',
     headers: {
         'Access-Allow-Origin': "*"
@@ -29,7 +33,7 @@ async function getMessages (conversationToken) {
     result = fetchDataFromAPI(getMessagesURL, getMessagesOptions);
     return result;
 }
-var conversationToken
+let conversationToken
 function establishConversation() {
     // if we don't have conversationToken, make a post and retrieve it. Also when we do have it already, load the list of messages.
     conversationToken = localStorage.getItem('conversationToken');
@@ -62,7 +66,7 @@ function establishConversation() {
             // Add more messages here...
         ];
 
-        var chatMessages = document.getElementById('chat-messages');
+        let chatMessages = document.getElementById('chat-messages');
         messages.forEach(message => {
             const messageElement = document.createElement('div');
             messageElement.textContent = `${message.sender}: ${message.text}`;
@@ -104,32 +108,41 @@ function sendMessage(event) {
     let message = messageInput.value;
     addMessageToChat(message, "user");
     messageInput.value = ''; // Clear input field after sending message
-    postMessage(conversationToken, message)
+    postMessage(conversationToken, message);
 }
 
 function addMessageToChat(message, author) {
     let chatMessages = document.getElementById('chat-messages');
     let messageContainer = document.createElement('div');
     messageContainer.className = 'message-container ' + author + '-message';
-    let authorImage = document.createElement("img");
+    let authorImage = (() => {
+        if (author === "user") {
+            let userImage = document.querySelector("#user-blueprint");
+            return userImage.cloneNode(true);
+        } else {
+            let aiImage = document.querySelector("#oda-blueprint");
+            return aiImage.cloneNode(true);
+        }
+    })();
+    authorImage.id = "";
     authorImage.className = 'avatar';
-    authorImage.src = author === "user" ? "../static/assets/user_sm.png" : "../static/assets/oda_v2_sm.png";
-    authorImage.width = "32";
-    authorImage.height = "32";
+    authorImage.style.display = "";
     let messageContent = document.createElement('div');
     messageContent.className = 'message-content';
     let senderHeadline = document.createElement('span');
-    senderHeadline.innerText = author === 'user' ? 'Du ' : 'ODA ';
+    senderHeadline.className = 'message-sender';
+    senderHeadline.innerText = author === 'user' ? 'Du' : 'ODA';
     let timeHeadline = document.createElement('span');
+    timeHeadline.className = 'message-time';
     timeHeadline.innerText = new Date().toLocaleTimeString();
     let messageNode = document.createElement('p');
     messageNode.innerText = message;
     messageContent.appendChild(senderHeadline);
     messageContent.appendChild(timeHeadline);
     messageContent.appendChild(messageNode);
-    if(author === "user") messageContainer.appendChild(authorImage);
     if(author === "ai") messageContainer.appendChild(authorImage);
     messageContainer.appendChild(messageContent);
+    if(author === "user") messageContainer.appendChild(authorImage);
     chatMessages.appendChild(messageContainer);
 }
 
@@ -146,7 +159,7 @@ function addToConversation(answer) {
 
 waitForElements()
 function waitForElements() {
-    let chatboxButton = document.querySelector('.chat-box button');
+    let chatboxButton = document.querySelector('#chat-box button');
     if(!chatboxButton) {
         setTimeout(waitForElements, 200);
     } else {
@@ -159,14 +172,42 @@ function initializeApp() {
     addEventListeners();
 }
 
+let _loadCounter = 0;
+function increaseLoadingCounter() {
+    _loadCounter++;
+    checkLoadingSpinner();
+}
+
+function decreaseLoadingCounter() {
+    _loadCounter--;
+    checkLoadingSpinner();
+}
+
+function checkLoadingSpinner() {
+    const spinner = document.querySelector('.loading-spinner');
+    if (!spinner) { return; }
+
+    spinner.setAttribute('data-counter', `${_loadCounter}`);
+    if (_loadCounter > 0) {
+        spinner.classList.add('active');
+    } else {
+        spinner.classList.remove('active');
+    }
+}
+
 function addEventListeners() {
+    // Event listener for mobile aside toggle
+    document.querySelector('.mobile-toggle').addEventListener('click', () => {
+        document.querySelector('.chat-aside').classList.toggle('visible');
+    });
+
     // Event listener for send button click
-    document.querySelector('#send-message-button').addEventListener('click', function() {
+    document.querySelector('#send-message-button').addEventListener('click', () => {
         sendMessage(conversationToken);
     });
 
     // Event listener for Enter key press
-    document.querySelector('.chat-box input[type="text"]').addEventListener('keypress', function(e) {
+    document.querySelector('#message-input').addEventListener('keypress', e => {
         if (e.key === 'Enter') {
             sendMessage();
         }

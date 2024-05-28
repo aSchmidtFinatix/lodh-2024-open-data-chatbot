@@ -1,0 +1,436 @@
+
+/**
+ *
+ * Requires:
+ * - IntelliJ File Watcher
+ * - Configure FileWatcher (https://www.jetbrains.com/help/webstorm/transpiling-sass-less-and-scss-to-css.html#ws_sass_less_scss_example_scss)
+ *
+ */
+
+$backgroundColor: #082E51;
+$chatBubbleFromAiBackgroundColor: #ADD5E3;
+$chatBubbleFromUserBackgroundColor: #DDD;
+$ctaBackgroundColor: #3496BA;
+$topBarHeight: 4.25rem;
+$newMessageHeight: 5.5rem;
+$finatixLogoHeight: 5rem;
+
+// loading spinner
+$offset: 187;
+$duration: 1.4s;
+
+$mobileBreakpointWidth: 900px;
+
+/* Default Styles*/
+
+* {
+  font-family: "Onest", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+body {
+  overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+/* Utility Styles */
+.font-weight-bold { font-weight: bold; }
+
+.md {
+  display: none;
+  @media screen and (min-width: $mobileBreakpointWidth) {
+    display: block;
+  }
+}
+.md-inline {
+  display: none;
+  @media screen and (min-width: $mobileBreakpointWidth) {
+    display: inline;
+  }
+}
+.sm-only {
+  display: none;
+  @media screen and (max-width: $mobileBreakpointWidth) {
+    display: block;
+  }
+}
+.hidden { display: none; }
+.block { display: block; }
+
+/* Custom Styles */
+
+.loading-spinner {
+  display: none;
+
+  animation: rotator $duration linear infinite;
+  position: relative;
+  left: 45%;
+  top: 45%;
+  z-index: 999;
+
+  &.active {
+    display: block;
+  }
+
+  .loading-spinner__path {
+    stroke-dasharray: $offset;
+    stroke-dashoffset: 0;
+    transform-origin: center;
+    animation:
+            dash $duration ease-in-out infinite,
+            colors ($duration*4) ease-in-out infinite;
+  }
+}
+
+.top-bar {
+  background-color: $backgroundColor;
+  color: white;
+
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+
+  height: $topBarHeight;
+  font-size: 1.66666667rem;
+  font-weight: 400;
+
+  margin: 0;
+  padding: 1rem;
+
+  .app-name {
+    margin-right: 1rem;
+  }
+
+  .app-name, .app-name * {
+    white-space: nowrap;
+  }
+
+  .conversation-name, .conversation-name * {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .city-select {
+    font-size: 1rem;
+    line-height: 2rem;
+  }
+}
+
+.layout {
+  padding-top: $topBarHeight;
+
+  display: grid;
+  grid-template-areas:
+    'aside main main main main main'
+    'aside main main main main main';
+}
+
+.chat-aside {
+  grid-area: aside;
+  border-right: solid rgba(163, 163, 163, 0.2) 2px;
+  background: #F0F5FF;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  position: relative;
+
+  width: 23px;
+  @media screen and (min-width: $mobileBreakpointWidth) {
+    width: auto;
+  }
+
+  &.visible {
+    width: 80svw;
+    position: fixed;
+    top: 4rem;
+    bottom: 0;
+    left: 0;
+    box-shadow: 3px 3px 30px rgba(0,0,0,0.5);
+
+    .conversation-list {
+      display: block;
+    }
+
+    .finatix-container {
+      display: flex;
+    }
+
+    .mini-finatix-logo {
+      display: none;
+    }
+
+    .mobile-toggle {
+      transform: rotateZ(180deg);
+    }
+  }
+
+  .mobile-toggle {
+    display: none;
+    cursor: pointer;
+    background: $ctaBackgroundColor;
+    position: absolute;
+    border-radius: 0 4px 4px 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 20px;
+    color: white;
+    text-align: center;
+    height: 40px;
+    line-height: 35px;
+    font-size: 2rem;
+
+    @media screen and (max-width: $mobileBreakpointWidth) {
+      display: block;
+    }
+  }
+
+  .mini-finatix-logo {
+    display: none;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @media screen and (max-width: $mobileBreakpointWidth) {
+      display: block;
+    }
+  }
+
+  .conversation-list {
+    display: none;
+    flex: 0 0 calc(100svh - #{$topBarHeight} - #{$finatixLogoHeight});
+    overflow: auto;
+    
+    @media screen and (min-width: $mobileBreakpointWidth) {
+      display: block;
+    }
+
+    img {
+      // float: right;
+      padding: 1rem;
+      max-width: 50%;
+    }
+
+    p {
+      padding: 0 1rem;
+    }
+
+    .conversation-item {
+      border-bottom: solid rgba(163, 163, 163, 0.2) 1px;
+      padding: 1rem;
+
+      &.active {
+        background-color: #ADD5E3;
+      }
+
+      &:hover {
+        background-color: #BFE5FF;
+        cursor: pointer;
+      }
+
+      .conversation-item-name {
+        font-weight: 700;
+        line-height: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .conversation-preview {
+        font-weight: 400;
+        line-height: 30px;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      .conversation-item-name, .conversation-preview {
+        margin: 0;
+      }
+    }
+  }
+
+  .finatix-container {
+    display: none;
+    flex: 0 1 0;
+    padding: 1rem;
+    height: $finatixLogoHeight;
+    justify-content: space-between;
+
+    @media screen and (min-width: $mobileBreakpointWidth) {
+      display: flex;
+    }
+
+    img {
+      width: 144px;
+    }
+
+    button {
+      $addConversationButtonSize: 3rem;
+      width: $addConversationButtonSize;
+      height: $addConversationButtonSize;
+      font-size: $addConversationButtonSize;
+      line-height: calc(#{ $addConversationButtonSize } / 2);
+      background: $ctaBackgroundColor;
+      border: 0;
+      color: white;
+      border-radius: 10px;
+      font-weight: lighter;
+    }
+  }
+}
+
+#chat-box {
+  grid-area: main;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  height: calc(100svh - #{$topBarHeight});
+
+  #chat-messages {
+    // overflow: scroll;
+    overflow: auto;
+    height: calc(100svh - #{$topBarHeight} - #{$newMessageHeight});
+    display: flex;
+    flex-direction: column;
+
+    .message-container {
+      padding: 1rem;
+      display: flex;
+
+      @media screen and (min-width: $mobileBreakpointWidth) {
+        max-width: 70%;
+      }
+
+      &.ai-message .message-content {
+        background-color: $chatBubbleFromAiBackgroundColor;
+      }
+
+      &.user-message {
+        align-self: flex-end;
+
+        .message-content {
+          background-color: $chatBubbleFromUserBackgroundColor;
+        }
+      }
+
+      .message-content {
+        display: inline-block;
+        padding: 10px;
+        margin: 5px;
+        border-radius: 10px;
+        color: #000;
+
+        .message-sender {
+          text-transform: uppercase;
+          font-weight: bold;
+
+          &::after {
+            content: ' - ';
+            display: inline;
+          }
+        }
+
+        .message-time {
+          text-transform: uppercase;
+          font-weight: bold;
+        }
+
+        .message-text {
+          margin-top: 1rem;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+
+  .new-message {
+
+    $borderColor: rgba(163, 163, 163, 1);
+
+    clear: both;
+    display: flex;
+
+    background-color: white;
+    width: 100%;
+    padding: 1.25rem 1rem;
+    height: $newMessageHeight;
+
+
+    input {
+      flex: 1 0 0;
+
+      height: 2.875rem;
+      width: 100%;
+      padding: 0 1rem;
+
+      border-radius: 12px 0 0 12px;
+      border-left: 1px solid $borderColor;
+      border-top: 1px solid $borderColor;
+      border-bottom: 1px solid $borderColor;
+      border-right: 0;
+      outline: 0;
+    }
+
+    .input-group-append {
+      flex: 0 1 0;
+
+      button {
+        height: 2.875rem;
+        padding: 0 1rem;
+        text-transform: uppercase;
+
+        background-color: $ctaBackgroundColor;
+        border-radius: 0 12px 12px 0;
+        border-left: 0;
+        border-top: 1px solid $borderColor;
+        border-right: 1px solid $borderColor;
+        border-bottom: 1px solid $borderColor;
+        color: white;
+      }
+    }
+  }
+}
+
+@keyframes colors {
+  0% { stroke: #4285F4; }
+  25% { stroke: #DE3E35; }
+  50% { stroke: #F7C223; }
+  75% { stroke: #1B9A59; }
+  100% { stroke: #4285F4; }
+}
+
+@keyframes dash {
+  0% { stroke-dashoffset: $offset; }
+  50% {
+    stroke-dashoffset: $offset/4;
+    transform:rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: $offset;
+    transform:rotate(450deg);
+  }
+}
+
+@keyframes rotator {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(270deg); }
+}
